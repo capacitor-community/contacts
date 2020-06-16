@@ -17,7 +17,12 @@ import java.util.Map;
 import java.util.Set;
 import org.json.JSONException;
 
-@NativePlugin
+@NativePlugin(
+  permissionRequestCode = 1,
+  permissions = {
+    Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS,
+  }
+)
 public class Contacts extends Plugin {
   public static final String CONTACT_ID = "contactId";
   public static final String EMAILS = "emails";
