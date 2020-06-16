@@ -1,24 +1,25 @@
-import { WebPlugin } from "@capacitor/core";
-import { ContactsPluginPlugin } from "./definitions";
+import { WebPlugin, registerWebPlugin } from "@capacitor/core";
+import { ContactsPlugin, PermissionStatus, Contact } from "./definitions";
 
-export class ContactsPluginWeb extends WebPlugin
-  implements ContactsPluginPlugin {
+export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   constructor() {
     super({
-      name: "ContactsPlugin",
+      name: "CapContacts",
       platforms: ["web"],
     });
   }
 
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log("ECHO", options);
-    return options;
+  async getPermissions(): Promise<PermissionStatus> {
+    throw new Error("getPermission not available");
+  }
+
+  async getContacts(): Promise<{ contacts: Contact[] }> {
+    throw new Error("getContacts not available");
   }
 }
 
-const ContactsPlugin = new ContactsPluginWeb();
+const Contacts = new ContactsPluginWeb();
 
-export { ContactsPlugin };
+export { Contacts };
 
-import { registerWebPlugin } from "@capacitor/core";
-registerWebPlugin(ContactsPlugin);
+registerWebPlugin(Contacts);
