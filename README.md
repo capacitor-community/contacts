@@ -1,9 +1,181 @@
-# Capacitor Community Github Org
+# Capacitor Contacts Plugin
 
-The `capacitor-community` GitHub org seeks to bring together the highest quality Capacitor plugins and the Capacitor plugin authoring community into a single place and help users find high quality, well maintained Capacitor plugins.
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-Every plugin in the `capacitor-community` org commits to a base level of maintenance and quality control, and, as much as possible, follows a set of consistent design and code standards.
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
-Unlike the core Capacitor tooling and APIs, plugins in the `capacitor-community` are not maintained by the Ionic or Capacitor core team (though may be maintained by individuals on the team), but by the community and community maintainers. However, the Ionic and Capacitor team do facilitate and work closely with maintainers to ensure that plugins are kept up to date, follow the latest in Capacitor plugin standards, and have a broad set of useful functionality.
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Beyond maintenance, plugin authors commit to providing a safe environment and adhere to the community Code of Conduct, and expect the same of all users.
+Capacitor community plugin for native Contact fetching.
+
+<!-- Badges -->
+<a href="https://npmjs.com/package/@capacitor-community/contacts">
+  <img src="https://img.shields.io/npm/v/@capacitor-community/contacts.svg">
+</a>
+<a href="https://npmjs.com/package/@capacitor-community/contacts">
+  <img src="https://img.shields.io/npm/l/@capacitor-community/contacts.svg">
+</a>
+
+## Maintainers
+
+| Maintainer                           | GitHub                                                                                       | Social                       | Sponsoring Company |
+| ------------------------------------ | -------------------------------------------------------------------------------------------- | ---------------------------- | ------------------ |
+| Jonathan Gerber / Byrds & Bytes GmbH | [idrimi](https://github.com/idrimi) / [Byrds & Bytes GmbH](https://github.com/byrdsandbytes) | [byrds.ch](https://byrds.ch) | Byrds & Bytes GmbH |
+
+Maintenance Status: Actively Maintained
+
+## Demo
+
+You can find a working Ionic App using the Byrds' Capacitor Contacts plugin here:
+https://github.com/byrdsandbytes/capContactsDemo
+
+## Prerequisites
+
+Setup your project with Capacitor. For details check here: https://capacitor.ionicframework.com/docs/
+
+```
+cd my-app
+npm install --save @capacitor/core @capacitor/cli
+```
+
+Initalize Capacitor
+
+```
+npx cap init
+```
+
+Add the platforms you want to use.
+
+```
+npx cap add android
+npx cap add ios
+npx cap add electron
+```
+
+## Installation
+
+Install:
+
+```
+npm i --save @capacitor-community/contacts
+```
+
+Sync:
+
+```
+npx cap sync
+```
+
+### iOS
+
+For iOS you need to set a usage description in your info.plist file. (Privacy Setting)
+Open xCode search for your info.plist file and press the tiny "+". Add the following entry:
+
+```
+Privacy - Contacts Usage Description
+```
+
+Give it a value like:
+
+```
+"We need access to your contacts in order to do something."
+```
+
+### Android Notes
+
+For Android you have to add the permisions in your AndroidManifest.xml. Add the following permissions before the closing of the "manifest" tag.
+
+```
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+```
+
+Next import the capContacts class to your MainActivity
+
+```
+// Initializes the Bridge
+    this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
+      // Additional plugins you've installed go here
+      // Ex: add(TotallyAwesomePlugin.class);
+      add(Contacts.class);
+    }});
+```
+
+Make sure to import it properly as well.
+
+```
+import ch.byrds.capacitor.contacts.Contacts;
+```
+
+**NOTE**: On Android you have to ask for permission first, before you can fetch the contacts. Use the `getPermissions()` method before you try to fetch contacts using `getContacts()`.
+
+## Usage / Examples
+
+You have the following Methods available:
+
+```
+export interface ContactsPlugin {
+  getPermissions(): Promise<PermissionStatus>;
+  getContacts(): Promise<{contacts: Contact[]}>;
+}
+```
+
+If you're considering to use this plugin you most likely want to retrive contacts a users contacts:
+
+Import the Plugin in your TS file:
+
+```
+import { Plugins } from "@capacitor/core";
+const  { Contacts } = Plugins;
+```
+
+Next use it and console log the result:
+
+```
+Contacts.getContacts().then(result => {
+    console.log(result);
+    for (const contact of result.contacts) {
+        console.log(contact);
+    }
+});
+
+```
+
+That's it. Do Whatever you want with the retrived contacts.
+
+If you're trying to build something like "contacts matching" based on phone numbers i recommend using google libphonenumber: https://www.npmjs.com/package/google-libphonenumber
+
+In order to match them properly you need to format them before you can match or store them properly.
+
+### Interfaces
+
+```
+export interface PermissionStatus {
+  granted: boolean;
+}
+
+export interface Contact {
+  contactId: string;
+  displayName?: string;
+  phoneNumbers: string[];
+  emails: string[];
+  organizationName?: string;
+  organizationRole?: string;
+  birthday?: string;
+}
+```
+
+## Built With
+
+- Swift 5
+- Java
+- Angular
+- Capacitor
+
+## Authors
+
+- Jonathan Gerber ([idrimi](https://github.com/idrimi))
+
+## License
+
+MIT
