@@ -18,7 +18,7 @@ import java.util.Set;
 import org.json.JSONException;
 
 @NativePlugin
-public class ContactsPlugin extends Plugin {
+public class Contacts extends Plugin {
   public static final String CONTACT_ID = "contactId";
   public static final String EMAILS = "emails";
   public static final String PHONE_NUMBERS = "phoneNumbers";
