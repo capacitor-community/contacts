@@ -27,7 +27,7 @@ Maintenance Status: Actively Maintained
 ## Demo
 
 You can find a working Ionic App using the Byrds' Capacitor Contacts plugin here:
-https://github.com/byrdsandbytes/capContactsDemo
+https://github.com/byrdsandbytes/capContactsDemo/tree/capacitor-community
 
 ## Prerequisites
 
