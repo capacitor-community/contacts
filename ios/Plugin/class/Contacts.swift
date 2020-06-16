@@ -3,7 +3,7 @@
 //  Plugin
 //
 //  Created by Jonathan Gerber on 16.02.20.
-//  Copyright © 2020 Jonathan Gerber. All rights reserved.
+//  Copyright © 2020 Byrds & Bytes GmbH. All rights reserved.
 //
 
 import Foundation
