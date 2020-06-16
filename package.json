@@ -1,0 +1,60 @@
+{
+  "name": "@capacitor-community/contacts",
+  "version": "0.0.1",
+  "description": "Contacts Plugin for Capacitor",
+  "main": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf ./dist",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Jonathan Gerber",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/core": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/ios": "latest",
+    "husky": "^4.2.5",
+    "np": "^6.2.4",
+    "prettier": "^2.0.5",
+    "prettier-plugin-java": "^0.8.0",
+    "pretty-quick": "^2.0.1",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.2.4"
+  },
+  "files": [
+    "dist/",
+    "ios/",
+    "android/",
+    "CapacitorCommunityContacts.podspec"
+  ],
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "native"
+  ],
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/capacitor-community/contacts"
+  },
+  "bugs": {
+    "url": "https://github.com/capacitor-community/contacts/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
