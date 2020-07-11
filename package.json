@@ -1,6 +1,6 @@
 {
   "name": "@capacitor-community/contacts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Contacts Plugin for Capacitor",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
