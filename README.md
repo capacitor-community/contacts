@@ -31,7 +31,7 @@ https://github.com/byrdsandbytes/capContactsDemo/tree/capacitor-community
 
 ## Prerequisites
 
-Setup your project with Capacitor. For details check here: https://capacitor.ionicframework.com/docs/
+Setup your project with Capacitor. For details check here: https://capacitorjs.com
 
 ```
 cd my-app
