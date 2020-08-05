@@ -1,0 +1,52 @@
+{
+  "projectName": "contacts",
+  "projectOwner": "idrimi (Jonathan Gerber)",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Idrimi",
+      "name": "idrimi",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/24573405?v=4",
+      "profile": "https://github.com/Idrimi",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tafelnl",
+      "name": "Tafel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/35837839?v=4",
+      "profile": "https://github.com/tafelnl",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mlynch",
+      "name": "Max Lynch",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11214?v=4",
+      "profile": "http://ionicframework.com/",
+      "contributions": [
+        "doc",
+        "eventOrganizing"
+      ]
+    },
+    {
+      "login": "david-garzon-adl",
+      "name": "David Javier Garzon Carrillo",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/45822796?v=4",
+      "profile": "https://github.com/david-garzon-adl",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

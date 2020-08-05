@@ -1,20 +1,22 @@
-# Capacitor Contacts Plugin
+<p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<h3 align="center">Contacts</h3>
+<p align="center"><strong><code>@capacitor-community/contacts</code></strong></p>
+<p align="center">
+  Capacitor community plugin for fetching contacts.
+</p>
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-
+<p align="center">
+  <img src="https://img.shields.io/maintenance/yes/2020?style=flat-square" />
+  <a href="https://github.com/capacitor-community/contacts/actions?query=workflow%3A%22CI%22"><img src="https://img.shields.io/github/workflow/status/capacitor-community/contacts/CI?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/l/@capacitor-community/contacts?style=flat-square" /></a>
+<br>
+  <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/dw/@capacitor-community/contacts?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/v/@capacitor-community/contacts?style=flat-square" /></a>
+  <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Capacitor community plugin for native Contact fetching.
-
-<!-- Badges -->
-<a href="https://npmjs.com/package/@capacitor-community/contacts">
-  <img src="https://img.shields.io/npm/v/@capacitor-community/contacts.svg">
-</a>
-<a href="https://npmjs.com/package/@capacitor-community/contacts">
-  <img src="https://img.shields.io/npm/l/@capacitor-community/contacts.svg">
-</a>
 
 ## Maintainers
 
@@ -179,3 +181,24 @@ export interface Contact {
 ## License
 
 MIT
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Idrimi"><img src="https://avatars0.githubusercontent.com/u/24573405?v=4?s=100" width="100px;" alt=""/><br /><sub><b>idrimi</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=Idrimi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tafelnl"><img src="https://avatars2.githubusercontent.com/u/35837839?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tafel</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=tafelnl" title="Code">💻</a></td>
+    <td align="center"><a href="http://ionicframework.com/"><img src="https://avatars3.githubusercontent.com/u/11214?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Lynch</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=mlynch" title="Documentation">📖</a> <a href="#eventOrganizing-mlynch" title="Event Organizing">📋</a></td>
+    <td align="center"><a href="https://github.com/david-garzon-adl"><img src="https://avatars0.githubusercontent.com/u/45822796?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Javier Garzon Carrillo</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=david-garzon-adl" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
