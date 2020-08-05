@@ -3,36 +3,32 @@ package ch.byrds.capacitor.contacts;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.database.Cursor;
-
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
-
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
-
-import org.json.JSONException;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.json.JSONException;
 
 @NativePlugin(
-  permissionRequestCode = 1,
+  permissionRequestCode = Contacts.REQUEST_CODE,
   permissions = {
     Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS,
   }
 )
 public class Contacts extends Plugin {
-
+  public static final int REQUEST_CODE = 0x1651; // Unique request code
   private static final String CONTACT_ID = "contactId";
   private static final String EMAILS = "emails";
   private static final String PHONE_NUMBERS = "phoneNumbers";
@@ -78,26 +74,46 @@ public class Contacts extends Plugin {
 
   @PluginMethod
   public void getContacts(PluginCall call) {
-
     // initialize array
     JSArray jsContacts = new JSArray();
 
     ContentResolver contentResolver = getContext().getContentResolver();
 
-    String[] projection = new String[] {ContactsContract.Data.MIMETYPE, Event.TYPE, Organization.TITLE, ContactsContract.Contacts._ID, ContactsContract.Data.CONTACT_ID, ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.CommonDataKinds.Contactables.DATA};
+    String[] projection = new String[] {
+      ContactsContract.Data.MIMETYPE,
+      Event.TYPE,
+      Organization.TITLE,
+      ContactsContract.Contacts._ID,
+      ContactsContract.Data.CONTACT_ID,
+      ContactsContract.Contacts.DISPLAY_NAME,
+      ContactsContract.CommonDataKinds.Contactables.DATA,
+    };
     String selection = ContactsContract.Data.MIMETYPE + " in (?, ?, ?, ?)";
-    String[] selectionArgs = new String[] {Email.CONTENT_ITEM_TYPE, Phone.CONTENT_ITEM_TYPE, Event.CONTENT_ITEM_TYPE, Organization.CONTENT_ITEM_TYPE};
+    String[] selectionArgs = new String[] {
+      Email.CONTENT_ITEM_TYPE,
+      Phone.CONTENT_ITEM_TYPE,
+      Event.CONTENT_ITEM_TYPE,
+      Organization.CONTENT_ITEM_TYPE,
+    };
 
-    Cursor contactsCursor = contentResolver.query(ContactsContract.Data.CONTENT_URI, projection, selection, selectionArgs, null);
+    Cursor contactsCursor = contentResolver.query(
+      ContactsContract.Data.CONTENT_URI,
+      projection,
+      selection,
+      selectionArgs,
+      null
+    );
 
     if (contactsCursor != null && contactsCursor.getCount() > 0) {
-
       HashMap<Object, JSObject> contactsById = new HashMap<>();
 
       while (contactsCursor.moveToNext()) {
-
-        String _id = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts._ID));
-        String contactId = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Data.CONTACT_ID));
+        String _id = contactsCursor.getString(
+          contactsCursor.getColumnIndex(ContactsContract.Contacts._ID)
+        );
+        String contactId = contactsCursor.getString(
+          contactsCursor.getColumnIndex(ContactsContract.Data.CONTACT_ID)
+        );
 
         JSObject jsContact = new JSObject();
 
@@ -106,7 +122,11 @@ public class Contacts extends Plugin {
           // so put it to the HashMap
 
           jsContact.put(CONTACT_ID, contactId);
-          String displayName = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+          String displayName = contactsCursor.getString(
+            contactsCursor.getColumnIndex(
+              ContactsContract.Contacts.DISPLAY_NAME
+            )
+          );
           jsContact.put(DISPLAY_NAME, displayName);
           JSArray jsPhoneNumbers = new JSArray();
           jsContact.put(PHONE_NUMBERS, jsPhoneNumbers);
@@ -120,11 +140,15 @@ public class Contacts extends Plugin {
           jsContact = contactsById.get(contactId);
         }
 
-
         if (jsContact != null) {
-
-          String mimeType = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Data.MIMETYPE));
-          String data = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.CommonDataKinds.Contactables.DATA));
+          String mimeType = contactsCursor.getString(
+            contactsCursor.getColumnIndex(ContactsContract.Data.MIMETYPE)
+          );
+          String data = contactsCursor.getString(
+            contactsCursor.getColumnIndex(
+              ContactsContract.CommonDataKinds.Contactables.DATA
+            )
+          );
 
           // email
           if (mimeType.equals(Email.CONTENT_ITEM_TYPE)) {
@@ -148,7 +172,9 @@ public class Contacts extends Plugin {
           }
           // birthday
           else if (mimeType.equals(Event.CONTENT_ITEM_TYPE)) {
-            int eventType = contactsCursor.getInt(contactsCursor.getColumnIndex(Event.TYPE));
+            int eventType = contactsCursor.getInt(
+              contactsCursor.getColumnIndex(Event.TYPE)
+            );
             if (eventType == Event.TYPE_BIRTHDAY) {
               jsContact.put(BIRTHDAY, data);
             }
@@ -156,16 +182,16 @@ public class Contacts extends Plugin {
           // organization
           else if (mimeType.equals(Organization.CONTENT_ITEM_TYPE)) {
             jsContact.put(ORGANIZATION_NAME, data);
-            String organizationRole = contactsCursor.getString(contactsCursor.getColumnIndex(Organization.TITLE));
+            String organizationRole = contactsCursor.getString(
+              contactsCursor.getColumnIndex(Organization.TITLE)
+            );
             if (organizationRole != null) {
               jsContact.put(ORGANIZATION_ROLE, organizationRole);
             }
           }
 
           contactsById.put(contactId, jsContact);
-
         }
-
       }
     }
     if (contactsCursor != null) {
@@ -272,5 +298,4 @@ public class Contacts extends Plugin {
     JSObject result = new JSObject();
     call.success(result);
   }
-
 }
