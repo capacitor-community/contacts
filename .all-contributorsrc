@@ -37,6 +37,15 @@
         "doc",
         "eventOrganizing"
       ]
+    },
+    {
+      "login": "david-garzon-adl",
+      "name": "David Javier Garzon Carrillo",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/45822796?v=4",
+      "profile": "https://github.com/david-garzon-adl",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
