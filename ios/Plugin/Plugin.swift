@@ -7,6 +7,7 @@
 
 import Foundation
 import Capacitor
+import Contacts
 
 
 @objc(ContactsPlugin)
@@ -36,16 +37,26 @@ public class ContactsPlugin: CAPPlugin {
                     let contacts = try Contacts.getContactFromCNContact()
 
                     for contact in contacts {
-                        var phoneNumbers: [String] = []
-                        var emails: [String] = []
+                        var phoneNumbers: [PluginResultData] = []
+                        var emails: [PluginResultData] = []
                         for number in contact.phoneNumbers {
                             let numberToAppend = number.value.stringValue
-                            phoneNumbers.append(numberToAppend)
+                            let label = number.label ?? ""
+                            let labelToAppend = CNLabeledValue<CNPhoneNumber>.localizedString(forLabel: label)
+                            phoneNumbers.append([
+                                "label": labelToAppend,
+                                "number": numberToAppend
+                            ])
                             print(phoneNumbers)
                         }
                         for email in contact.emailAddresses {
                             let emailToAppend = email.value as String
-                            emails.append(emailToAppend)
+                            let label = email.label ?? ""
+                            let labelToAppend = CNLabeledValue<NSString>.localizedString(forLabel: label)
+                            emails.append([
+                                "label": labelToAppend,
+                                "address": emailToAppend
+                            ])
                         }
                         let contactResult: PluginResultData = [
                             "contactId": contact.identifier,
