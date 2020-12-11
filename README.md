@@ -158,7 +158,6 @@ export interface PermissionStatus {
 export interface Contact {
   contactId: string;
   displayName?: string;
-  thumbnail?: string;
   phoneNumbers: PhoneNumber[];
   emails: EmailAddress[];
   organizationName?: string;
