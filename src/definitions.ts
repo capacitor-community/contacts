@@ -10,6 +10,7 @@ export interface PermissionStatus {
 export interface Contact {
   contactId: string;
   displayName?: string;
+  photoThumbnail?: string;
   phoneNumbers: string[];
   emails: string[];
   organizationName?: string;
