@@ -47,12 +47,25 @@ public class ContactsPlugin: CAPPlugin {
                             let emailToAppend = email.value as String
                             emails.append(emailToAppend)
                         }
-                        let contactResult: PluginResultData = [
+                        let dateFormatter = DateFormatter()
+                        // You must set the time zone from your default time zone to UTC +0,
+                        // which is what birthdays in Contacts are set to.
+                        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                        dateFormatter.dateFormat = "YYYY-MM-dd"
+                           
+                        var contactResult: PluginResultData = [
                             "contactId": contact.identifier,
                             "displayName": "\(contact.givenName) \(contact.familyName)",
                             "phoneNumbers": phoneNumbers,
-                            "emails": emails
+                            "emails": emails,
                         ]
+                        if let birthday = contact.birthday?.date {
+                            contactResult["birthday"] = dateFormatter.string(from: birthday)
+                        }
+                        if !contact.organizationName.isEmpty {
+                            contactResult["organizationName"] = contact.organizationName
+                            contactResult["organizationRole"] = contact.jobTitle
+                        }
                         contactsArray.append(contactResult)
                     }
                     call.success([
