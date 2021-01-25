@@ -58,12 +58,15 @@ public class ContactsPlugin: CAPPlugin {
                                 "address": emailToAppend
                             ])
                         }
-                        let contactResult: PluginResultData = [
+                        var contactResult: PluginResultData = [
                             "contactId": contact.identifier,
                             "displayName": "\(contact.givenName) \(contact.familyName)",
                             "phoneNumbers": phoneNumbers,
                             "emails": emails
                         ]
+                        if let photoThumbnail = contact.thumbnailImageData {
+                            contactResult["photoThumbnail"] = "data:image/png;base64,\(photoThumbnail.base64EncodedString())"
+                        }
                         contactsArray.append(contactResult)
                     }
                     call.success([
