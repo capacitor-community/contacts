@@ -7,6 +7,7 @@
 
 import Foundation
 import Capacitor
+import Contacts
 
 
 @objc(ContactsPlugin)
@@ -36,23 +37,48 @@ public class ContactsPlugin: CAPPlugin {
                     let contacts = try Contacts.getContactFromCNContact()
 
                     for contact in contacts {
-                        var phoneNumbers: [String] = []
-                        var emails: [String] = []
+                        var phoneNumbers: [PluginResultData] = []
+                        var emails: [PluginResultData] = []
                         for number in contact.phoneNumbers {
                             let numberToAppend = number.value.stringValue
-                            phoneNumbers.append(numberToAppend)
+                            let label = number.label ?? ""
+                            let labelToAppend = CNLabeledValue<CNPhoneNumber>.localizedString(forLabel: label)
+                            phoneNumbers.append([
+                                "label": labelToAppend,
+                                "number": numberToAppend
+                            ])
                             print(phoneNumbers)
                         }
                         for email in contact.emailAddresses {
                             let emailToAppend = email.value as String
-                            emails.append(emailToAppend)
+                            let label = email.label ?? ""
+                            let labelToAppend = CNLabeledValue<NSString>.localizedString(forLabel: label)
+                            emails.append([
+                                "label": labelToAppend,
+                                "address": emailToAppend
+                            ])
                         }
-                        let contactResult: PluginResultData = [
+                        let dateFormatter = DateFormatter()
+                        // You must set the time zone from your default time zone to UTC +0,
+                        // which is what birthdays in Contacts are set to.
+                        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                        dateFormatter.dateFormat = "YYYY-MM-dd"
+                           
+                        var contactResult: PluginResultData = [
                             "contactId": contact.identifier,
                             "displayName": "\(contact.givenName) \(contact.familyName)",
                             "phoneNumbers": phoneNumbers,
-                            "emails": emails
+                            "emails": emails,
                         ]
+                        if let photoThumbnail = contact.thumbnailImageData {
+                            contactResult["photoThumbnail"] = "data:image/png;base64,\(photoThumbnail.base64EncodedString())"
+                        if let birthday = contact.birthday?.date {
+                            contactResult["birthday"] = dateFormatter.string(from: birthday)
+                        }
+                        if !contact.organizationName.isEmpty {
+                            contactResult["organizationName"] = contact.organizationName
+                            contactResult["organizationRole"] = contact.jobTitle
+                        }
                         contactsArray.append(contactResult)
                     }
                     call.success([

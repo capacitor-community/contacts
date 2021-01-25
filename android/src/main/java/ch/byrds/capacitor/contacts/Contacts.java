@@ -9,6 +9,8 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.Photo;
+import android.util.Base64;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
@@ -31,8 +33,13 @@ public class Contacts extends Plugin {
   public static final int REQUEST_CODE = 0x1651; // Unique request code
   private static final String CONTACT_ID = "contactId";
   private static final String EMAILS = "emails";
+  private static final String EMAIL_LABEL = "label";
+  private static final String EMAIL_ADDRESS = "address";
   private static final String PHONE_NUMBERS = "phoneNumbers";
+  private static final String PHONE_LABEL = "label";
+  private static final String PHONE_NUMBER = "number";
   private static final String DISPLAY_NAME = "displayName";
+  private static final String PHOTO_THUMBNAIL = "photoThumbnail";
   private static final String ORGANIZATION_NAME = "organizationName";
   private static final String ORGANIZATION_ROLE = "organizationRole";
   private static final String BIRTHDAY = "birthday";
@@ -81,19 +88,22 @@ public class Contacts extends Plugin {
 
     String[] projection = new String[] {
       ContactsContract.Data.MIMETYPE,
-      Event.TYPE,
       Organization.TITLE,
       ContactsContract.Contacts._ID,
       ContactsContract.Data.CONTACT_ID,
       ContactsContract.Contacts.DISPLAY_NAME,
+      ContactsContract.Contacts.Photo.PHOTO,
       ContactsContract.CommonDataKinds.Contactables.DATA,
+      ContactsContract.CommonDataKinds.Contactables.TYPE,
+      ContactsContract.CommonDataKinds.Contactables.LABEL,
     };
-    String selection = ContactsContract.Data.MIMETYPE + " in (?, ?, ?, ?)";
+    String selection = ContactsContract.Data.MIMETYPE + " in (?, ?, ?, ?, ?)";
     String[] selectionArgs = new String[] {
       Email.CONTENT_ITEM_TYPE,
       Phone.CONTENT_ITEM_TYPE,
       Event.CONTENT_ITEM_TYPE,
       Organization.CONTENT_ITEM_TYPE,
+      Photo.CONTENT_ITEM_TYPE,
     };
 
     Cursor contactsCursor = contentResolver.query(
@@ -127,6 +137,7 @@ public class Contacts extends Plugin {
               ContactsContract.Contacts.DISPLAY_NAME
             )
           );
+
           jsContact.put(DISPLAY_NAME, displayName);
           JSArray jsPhoneNumbers = new JSArray();
           jsContact.put(PHONE_NUMBERS, jsPhoneNumbers);
@@ -149,13 +160,26 @@ public class Contacts extends Plugin {
               ContactsContract.CommonDataKinds.Contactables.DATA
             )
           );
+          int type = contactsCursor.getInt(
+            contactsCursor.getColumnIndex(
+              ContactsContract.CommonDataKinds.Contactables.TYPE
+            )
+          );
+          String label = contactsCursor.getString(
+            contactsCursor.getColumnIndex(
+              ContactsContract.CommonDataKinds.Contactables.LABEL
+            )
+          );
 
           // email
           if (mimeType.equals(Email.CONTENT_ITEM_TYPE)) {
             try {
               // add this email to the list
               JSArray emailAddresses = (JSArray) jsContact.get(EMAILS);
-              emailAddresses.put(data);
+              JSObject jsEmail = new JSObject();
+              jsEmail.put(EMAIL_LABEL, mapEmailTypeToLabel(type, label));
+              jsEmail.put(EMAIL_ADDRESS, data);
+              emailAddresses.put(jsEmail);
             } catch (JSONException e) {
               e.printStackTrace();
             }
@@ -165,7 +189,10 @@ public class Contacts extends Plugin {
             try {
               // add this phone to the list
               JSArray jsPhoneNumbers = (JSArray) jsContact.get(PHONE_NUMBERS);
-              jsPhoneNumbers.put(data);
+              JSObject jsPhone = new JSObject();
+              jsPhone.put(PHONE_LABEL, mapPhoneTypeToLabel(type, label));
+              jsPhone.put(PHONE_NUMBER, data);
+              jsPhoneNumbers.put(jsPhone);
             } catch (JSONException e) {
               e.printStackTrace();
             }
@@ -173,7 +200,9 @@ public class Contacts extends Plugin {
           // birthday
           else if (mimeType.equals(Event.CONTENT_ITEM_TYPE)) {
             int eventType = contactsCursor.getInt(
-              contactsCursor.getColumnIndex(Event.TYPE)
+              contactsCursor.getColumnIndex(
+                ContactsContract.CommonDataKinds.Contactables.TYPE
+              )
             );
             if (eventType == Event.TYPE_BIRTHDAY) {
               jsContact.put(BIRTHDAY, data);
@@ -187,6 +216,24 @@ public class Contacts extends Plugin {
             );
             if (organizationRole != null) {
               jsContact.put(ORGANIZATION_ROLE, organizationRole);
+            }
+          }
+          // photo
+          else if (mimeType.equals(Photo.CONTENT_ITEM_TYPE)) {
+            byte[] thumbnailPhoto = contactsCursor.getBlob(
+              contactsCursor.getColumnIndex(
+                ContactsContract.Contacts.Photo.PHOTO
+              )
+            );
+            if (thumbnailPhoto != null) {
+              String encodedThumbnailPhoto = Base64.encodeToString(
+                thumbnailPhoto,
+                Base64.NO_WRAP
+              );
+              jsContact.put(
+                PHOTO_THUMBNAIL,
+                "data:image/png;base64," + encodedThumbnailPhoto
+              );
             }
           }
 
@@ -297,5 +344,67 @@ public class Contacts extends Plugin {
 
     JSObject result = new JSObject();
     call.success(result);
+  }
+
+  private String mapPhoneTypeToLabel(int type, String defaultLabel) {
+    switch (type) {
+      case Phone.TYPE_MOBILE:
+        return "mobile";
+      case Phone.TYPE_HOME:
+        return "home";
+      case Phone.TYPE_WORK:
+        return "work";
+      case Phone.TYPE_FAX_WORK:
+        return "fax work";
+      case Phone.TYPE_FAX_HOME:
+        return "fax home";
+      case Phone.TYPE_PAGER:
+        return "pager";
+      case Phone.TYPE_OTHER:
+        return "other";
+      case Phone.TYPE_CALLBACK:
+        return "callback";
+      case Phone.TYPE_CAR:
+        return "car";
+      case Phone.TYPE_COMPANY_MAIN:
+        return "company main";
+      case Phone.TYPE_ISDN:
+        return "isdn";
+      case Phone.TYPE_MAIN:
+        return "main";
+      case Phone.TYPE_OTHER_FAX:
+        return "other fax";
+      case Phone.TYPE_RADIO:
+        return "radio";
+      case Phone.TYPE_TELEX:
+        return "telex";
+      case Phone.TYPE_TTY_TDD:
+        return "tty";
+      case Phone.TYPE_WORK_MOBILE:
+        return "work mobile";
+      case Phone.TYPE_WORK_PAGER:
+        return "work pager";
+      case Phone.TYPE_ASSISTANT:
+        return "assistant";
+      case Phone.TYPE_MMS:
+        return "mms";
+      default:
+        return defaultLabel;
+    }
+  }
+
+  private String mapEmailTypeToLabel(int type, String defaultLabel) {
+    switch (type) {
+      case Email.TYPE_HOME:
+        return "home";
+      case Email.TYPE_WORK:
+        return "work";
+      case Email.TYPE_OTHER:
+        return "other";
+      case Email.TYPE_MOBILE:
+        return "mobile";
+      default:
+        return defaultLabel;
+    }
   }
 }
