@@ -17,7 +17,6 @@
 <a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-
 ## Maintainers
 
 | Maintainer                           | GitHub                                                                                       | Social                       | Sponsoring Company |
@@ -159,11 +158,21 @@ export interface PermissionStatus {
 export interface Contact {
   contactId: string;
   displayName?: string;
-  phoneNumbers: string[];
-  emails: string[];
+  phoneNumbers: PhoneNumber[];
+  emails: EmailAddress[];
   organizationName?: string;
   organizationRole?: string;
   birthday?: string;
+}
+
+export interface PhoneNumber {
+  label?: string;
+  number?: string;
+}
+
+export interface EmailAddress {
+  label?: string;
+  address?: string;
 }
 ```
 
