@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/dw/@capacitor-community/contacts?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/v/@capacitor-community/contacts?style=flat-square" /></a>
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square" /></a>
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Maintainers
@@ -203,6 +203,7 @@ MIT
     <td align="center"><a href="https://github.com/tafelnl"><img src="https://avatars2.githubusercontent.com/u/35837839?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tafel</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=tafelnl" title="Code">💻</a></td>
     <td align="center"><a href="http://ionicframework.com/"><img src="https://avatars3.githubusercontent.com/u/11214?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Lynch</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=mlynch" title="Documentation">📖</a> <a href="#eventOrganizing-mlynch" title="Event Organizing">📋</a></td>
     <td align="center"><a href="https://github.com/david-garzon-adl"><img src="https://avatars0.githubusercontent.com/u/45822796?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Javier Garzon Carrillo</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=david-garzon-adl" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vhinic"><img src="https://avatars.githubusercontent.com/u/244439?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vladimir Hinić</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=vhinic" title="Code">💻</a></td>
   </tr>
 </table>
 
