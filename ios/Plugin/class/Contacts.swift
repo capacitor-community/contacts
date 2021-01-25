@@ -20,6 +20,7 @@ class Contacts {
             CNContactMiddleNameKey,
             CNContactFamilyNameKey,
             CNContactEmailAddressesKey,
+            CNContactThumbnailImageDataKey,
             ] as [Any]
 
         //Get all the containers

@@ -9,6 +9,8 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.Photo;
+import android.util.Base64;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
@@ -37,6 +39,7 @@ public class Contacts extends Plugin {
   private static final String PHONE_LABEL = "label";
   private static final String PHONE_NUMBER = "number";
   private static final String DISPLAY_NAME = "displayName";
+  private static final String PHOTO_THUMBNAIL = "photoThumbnail";
   private static final String ORGANIZATION_NAME = "organizationName";
   private static final String ORGANIZATION_ROLE = "organizationRole";
   private static final String BIRTHDAY = "birthday";
@@ -89,16 +92,18 @@ public class Contacts extends Plugin {
       ContactsContract.Contacts._ID,
       ContactsContract.Data.CONTACT_ID,
       ContactsContract.Contacts.DISPLAY_NAME,
+      ContactsContract.Contacts.Photo.PHOTO,
       ContactsContract.CommonDataKinds.Contactables.DATA,
       ContactsContract.CommonDataKinds.Contactables.TYPE,
       ContactsContract.CommonDataKinds.Contactables.LABEL,
     };
-    String selection = ContactsContract.Data.MIMETYPE + " in (?, ?, ?, ?)";
+    String selection = ContactsContract.Data.MIMETYPE + " in (?, ?, ?, ?, ?)";
     String[] selectionArgs = new String[] {
       Email.CONTENT_ITEM_TYPE,
       Phone.CONTENT_ITEM_TYPE,
       Event.CONTENT_ITEM_TYPE,
       Organization.CONTENT_ITEM_TYPE,
+      Photo.CONTENT_ITEM_TYPE,
     };
 
     Cursor contactsCursor = contentResolver.query(
@@ -211,6 +216,24 @@ public class Contacts extends Plugin {
             );
             if (organizationRole != null) {
               jsContact.put(ORGANIZATION_ROLE, organizationRole);
+            }
+          }
+          // photo
+          else if (mimeType.equals(Photo.CONTENT_ITEM_TYPE)) {
+            byte[] thumbnailPhoto = contactsCursor.getBlob(
+              contactsCursor.getColumnIndex(
+                ContactsContract.Contacts.Photo.PHOTO
+              )
+            );
+            if (thumbnailPhoto != null) {
+              String encodedThumbnailPhoto = Base64.encodeToString(
+                thumbnailPhoto,
+                Base64.NO_WRAP
+              );
+              jsContact.put(
+                PHOTO_THUMBNAIL,
+                "data:image/png;base64," + encodedThumbnailPhoto
+              );
             }
           }
 
