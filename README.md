@@ -175,6 +175,35 @@ export interface EmailAddress {
 }
 ```
 
+### Sorting
+
+In order to sort contacts alphabetically by their displayName, you can you this in your typescript component
+
+```
+  contactList = [];
+  let data = await Contacts.getContacts();
+  this.contactList = data.contacts.sort(function (a, b) {
+      return a.displayName.localeCompare(b.displayName);
+    });
+```
+
+### Handling permission in Android
+
+You can properly handle permissions on andriod in this manner
+
+```
+  async loadConact() {
+    if (isPlatform("android")) {
+      let permission = await Contacts.getPermissions();
+      if (!permission.granted) {
+        return;
+      }
+    }
+    let data = await Contacts.getContacts();
+  }
+```
+
+
 ## Built With
 
 - Swift 5
