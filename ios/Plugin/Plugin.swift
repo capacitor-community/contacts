@@ -12,7 +12,7 @@ import Contacts
 
 @objc(ContactsPlugin)
 public class ContactsPlugin: CAPPlugin {
-
+    
     @objc func getPermissions(_ call: CAPPluginCall) {
         print("checkPermission was triggered in Swift")
         Permissions.contactPermission { granted in
@@ -25,17 +25,17 @@ public class ContactsPlugin: CAPPlugin {
                 call.success([
                     "granted": false
                 ])
-                }
             }
+        }
     }
-
+    
     @objc func getContacts(_ call: CAPPluginCall) {
         var contactsArray : [PluginResultData] = [];
         Permissions.contactPermission { granted in
             if granted {
                 do {
                     let contacts = try Contacts.getContactFromCNContact()
-
+                    
                     for contact in contacts {
                         var phoneNumbers: [PluginResultData] = []
                         var emails: [PluginResultData] = []
@@ -63,7 +63,7 @@ public class ContactsPlugin: CAPPlugin {
                         // which is what birthdays in Contacts are set to.
                         dateFormatter.timeZone = TimeZone(identifier: "UTC")
                         dateFormatter.dateFormat = "YYYY-MM-dd"
-                           
+                        
                         var contactResult: PluginResultData = [
                             "contactId": contact.identifier,
                             "displayName": "\(contact.givenName) \(contact.familyName)",
@@ -72,12 +72,13 @@ public class ContactsPlugin: CAPPlugin {
                         ]
                         if let photoThumbnail = contact.thumbnailImageData {
                             contactResult["photoThumbnail"] = "data:image/png;base64,\(photoThumbnail.base64EncodedString())"
-                        if let birthday = contact.birthday?.date {
-                            contactResult["birthday"] = dateFormatter.string(from: birthday)
-                        }
-                        if !contact.organizationName.isEmpty {
-                            contactResult["organizationName"] = contact.organizationName
-                            contactResult["organizationRole"] = contact.jobTitle
+                            if let birthday = contact.birthday?.date {
+                                contactResult["birthday"] = dateFormatter.string(from: birthday)
+                            }
+                            if !contact.organizationName.isEmpty {
+                                contactResult["organizationName"] = contact.organizationName
+                                contactResult["organizationRole"] = contact.jobTitle
+                            }
                         }
                         contactsArray.append(contactResult)
                     }
@@ -92,6 +93,5 @@ public class ContactsPlugin: CAPPlugin {
             }
         }
     }
-
 }
 
