@@ -18,11 +18,11 @@ public class ContactsPlugin: CAPPlugin {
         Permissions.contactPermission { granted in
             switch granted {
             case true:
-                call.success([
+                call.resolve([
                     "granted": true
                 ])
             default:
-                call.success([
+                call.resolve([
                     "granted": false
                 ])
             }
@@ -82,14 +82,14 @@ public class ContactsPlugin: CAPPlugin {
                         }
                         contactsArray.append(contactResult)
                     }
-                    call.success([
+                    call.resolve([
                         "contacts": contactsArray
                     ])
                 } catch let error as NSError {
-                    call.error("Generic Error", error)
+                    call.reject("Generic Error", error)
                 }
             } else {
-                call.error("User denied access to contacts")
+                call.reject("User denied access to contacts")
             }
         }
     }
