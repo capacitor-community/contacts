@@ -7,7 +7,6 @@
 export interface ContactsPlugin {
   getPermissions(): Promise<PermissionStatus>;
   getContacts(): Promise<{ contacts: Contact[] }>;
-  echo(options: { value: string }): Promise<{ value: string }>;
 }
 
 export interface PermissionStatus {
