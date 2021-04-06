@@ -219,7 +219,6 @@ MIT
 
 * [`getPermissions()`](#getpermissions)
 * [`getContacts()`](#getcontacts)
-* [`echo(...)`](#echo)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -243,21 +242,6 @@ getPermissions() => any
 ```typescript
 getContacts() => any
 ```
-
-**Returns:** <code>any</code>
-
---------------------
-
-
-### echo(...)
-
-```typescript
-echo(options: { value: string; }) => any
-```
-
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
 
 **Returns:** <code>any</code>
 
