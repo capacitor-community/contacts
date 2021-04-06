@@ -1,5 +1,6 @@
-import { WebPlugin, registerWebPlugin } from "@capacitor/core";
+import { WebPlugin } from "@capacitor/core";
 import { ContactsPlugin, PermissionStatus, Contact } from "./definitions";
+
 
 export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   constructor() {
@@ -16,10 +17,14 @@ export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   async getContacts(): Promise<{ contacts: Contact[] }> {
     throw new Error("getContacts not available");
   }
+
+  async echo(options: { value: string }): Promise<{ value: string }> {
+    console.log('ECHO', options);
+    return options;
+  }
 }
 
 const Contacts = new ContactsPluginWeb();
 
 export { Contacts };
 
-registerWebPlugin(Contacts);

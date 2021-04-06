@@ -1,8 +1,15 @@
-declare module "@capacitor/core" {
-  interface PluginRegistry {
-    Contacts: ContactsPlugin;
-  }
+// declare module "@capacitor/core" {
+//   interface PluginRegistry {
+//     Contacts: ContactsPlugin;
+//   }
+// }
+
+export interface ContactsPlugin {
+  getPermissions(): Promise<PermissionStatus>;
+  getContacts(): Promise<{ contacts: Contact[] }>;
+  echo(options: { value: string }): Promise<{ value: string }>;
 }
+
 export interface PermissionStatus {
   granted: boolean;
 }
@@ -26,9 +33,4 @@ export interface Contact {
   organizationName?: string;
   organizationRole?: string;
   birthday?: string;
-}
-
-export interface ContactsPlugin {
-  getPermissions(): Promise<PermissionStatus>;
-  getContacts(): Promise<{ contacts: Contact[] }>;
 }
