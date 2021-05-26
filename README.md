@@ -211,3 +211,80 @@ MIT
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
+## API
+
+<docgen-index>
+
+* [`getPermissions()`](#getpermissions)
+* [`getContacts()`](#getcontacts)
+* [Interfaces](#interfaces)
+
+</docgen-index>
+
+<docgen-api>
+<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
+
+### getPermissions()
+
+```typescript
+getPermissions() => any
+```
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### getContacts()
+
+```typescript
+getContacts() => any
+```
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### Interfaces
+
+
+#### PermissionStatus
+
+| Prop          | Type                 |
+| ------------- | -------------------- |
+| **`granted`** | <code>boolean</code> |
+
+
+#### Contact
+
+| Prop                   | Type                |
+| ---------------------- | ------------------- |
+| **`contactId`**        | <code>string</code> |
+| **`displayName`**      | <code>string</code> |
+| **`phoneNumbers`**     | <code>{}</code>     |
+| **`emails`**           | <code>{}</code>     |
+| **`photoThumbnail`**   | <code>string</code> |
+| **`organizationName`** | <code>string</code> |
+| **`organizationRole`** | <code>string</code> |
+| **`birthday`**         | <code>string</code> |
+
+
+#### PhoneNumber
+
+| Prop         | Type                |
+| ------------ | ------------------- |
+| **`label`**  | <code>string</code> |
+| **`number`** | <code>string</code> |
+
+
+#### EmailAddress
+
+| Prop          | Type                |
+| ------------- | ------------------- |
+| **`label`**   | <code>string</code> |
+| **`address`** | <code>string</code> |
+
+</docgen-api>

@@ -10,19 +10,31 @@ import Capacitor
 import Contacts
 
 
+
+
 @objc(ContactsPlugin)
 public class ContactsPlugin: CAPPlugin {
-    
+
+    @objc func echo(_ call: CAPPluginCall) {
+        print("ios Code rached")
+        
+        let value = call.getString("value") ?? ""
+        call.resolve([
+            "value": "hello"
+        ])
+    }
+
+
     @objc func getPermissions(_ call: CAPPluginCall) {
         print("checkPermission was triggered in Swift")
         Permissions.contactPermission { granted in
             switch granted {
             case true:
-                call.success([
+                call.resolve([
                     "granted": true
                 ])
             default:
-                call.success([
+                call.resolve([
                     "granted": false
                 ])
             }
@@ -82,14 +94,14 @@ public class ContactsPlugin: CAPPlugin {
                         }
                         contactsArray.append(contactResult)
                     }
-                    call.success([
+                    call.resolve([
                         "contacts": contactsArray
                     ])
                 } catch let error as NSError {
-                    call.error("Generic Error", error)
+                    call.reject("Generic Error", error as! String)
                 }
             } else {
-                call.error("User denied access to contacts")
+                call.reject("User denied access to contacts")
             }
         }
     }

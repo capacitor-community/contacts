@@ -1,5 +1,6 @@
-import { WebPlugin, registerWebPlugin } from "@capacitor/core";
+import { WebPlugin } from "@capacitor/core";
 import { ContactsPlugin, PermissionStatus, Contact } from "./definitions";
+
 
 export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   constructor() {
@@ -22,4 +23,3 @@ const Contacts = new ContactsPluginWeb();
 
 export { Contacts };
 
-registerWebPlugin(Contacts);
