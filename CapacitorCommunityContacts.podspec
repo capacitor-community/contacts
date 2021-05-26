@@ -1,7 +1,7 @@
 
   Pod::Spec.new do |s|
     s.name = 'CapacitorCommunityContacts'
-    s.version = '0.0.1'
+    s.version = '1.0.6'
     s.summary = 'Contacts Plugin for Capacitor'
     s.license = 'MIT'
     s.homepage = 'https://github.com/capacitor-community/contacts'
