@@ -124,8 +124,7 @@ If you're considering to use this plugin you most likely want to retrive contact
 Import the Plugin in your TS file:
 
 ```
-import { Plugins } from "@capacitor/core";
-const  { Contacts } = Plugins;
+import { Contacts } from '@capacitor-community/contacts'
 ```
 
 Next use it and console log the result:
