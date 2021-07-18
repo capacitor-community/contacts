@@ -4,10 +4,7 @@ import { ContactsPlugin, PermissionStatus, Contact } from "./definitions";
 
 export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   constructor() {
-    super({
-      name: "CapContacts",
-      platforms: ["web"],
-    });
+    super();
   }
 
   async getPermissions(): Promise<PermissionStatus> {
