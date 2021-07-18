@@ -8,11 +8,11 @@ export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   }
 
   async getPermissions(): Promise<PermissionStatus> {
-    throw new Error("getPermission not available");
+    throw this.unimplemented('Not implemented on web.');
   }
 
   async getContacts(): Promise<{ contacts: Contact[] }> {
-    throw new Error("getContacts not available");
+    throw this.unimplemented('Not implemented on web.');
   }
 }
 
