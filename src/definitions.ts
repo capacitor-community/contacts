@@ -7,6 +7,7 @@
 export interface ContactsPlugin {
   getPermissions(): Promise<PermissionStatus>;
   getContacts(): Promise<{ contacts: Contact[] }>;
+  saveContact(): Promise<void>;
 }
 
 export interface PermissionStatus {

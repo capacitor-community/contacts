@@ -17,6 +17,10 @@ export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   async getContacts(): Promise<{ contacts: Contact[] }> {
     throw new Error("getContacts not available");
   }
+
+  async saveContact(): Promise<void> {
+    throw new Error('saveContact not available');
+  }
 }
 
 const Contacts = new ContactsPluginWeb();
