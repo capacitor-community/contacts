@@ -11,10 +11,10 @@ import Foundation
 import Contacts
 
 class Contacts {
-    
+
     class func getContactFromCNContact() throws -> [CNContact] {
         let contactStore = CNContactStore()
-        
+
         let keysToFetch = [
             CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
             CNContactPhoneNumbersKey,
@@ -25,10 +25,10 @@ class Contacts {
             CNContactThumbnailImageDataKey,
             CNContactBirthdayKey,
             CNContactOrganizationNameKey,
-            CNContactJobTitleKey,
-            ] as [Any]
+            CNContactJobTitleKey
+        ] as [Any]
 
-        //Get all the containers
+        // Get all the containers
         var allContainers: [CNContainer] = []
         allContainers = try contactStore.containers(matching: nil)
 
@@ -43,7 +43,7 @@ class Contacts {
 
         return results
     }
-    
+
     class func findContacts(withName: String) throws -> [CNContact] {
         var contacts = [CNContact]()
         let predicate: NSPredicate = CNContact.predicateForContacts(matchingName: withName)
@@ -51,7 +51,7 @@ class Contacts {
         contacts = try contactStore.unifiedContacts(matching: predicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
         return contacts
     }
-    
+
     class func getPostalAddressFromAddress(jsAddress: JSObject) -> CNMutablePostalAddress {
         let address = CNMutablePostalAddress()
 
@@ -63,5 +63,5 @@ class Contacts {
 
         return address
     }
-    
+
 }

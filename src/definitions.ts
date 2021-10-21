@@ -20,6 +20,7 @@ export interface PhoneNumber {
 }
 
 export interface EmailAddress {
+  // TODO: make label an enum of android and ios label types to map them later + string for iOS
   label?: string;
   address?: string;
 }

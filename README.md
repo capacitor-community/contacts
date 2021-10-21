@@ -304,14 +304,6 @@ saveContact(contact: NewContact) => any
 
 New contact schema.
 
-#### iOS only
-
-- /
-
-#### Android only
-
-- /
-
 | Prop                   | Type                                                | Description  |
 | ---------------------- | --------------------------------------------------- | ------------ |
 | **`contactType`**      | <code><a href="#contacttype">ContactType</a></code> |              |

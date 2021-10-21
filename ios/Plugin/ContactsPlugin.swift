@@ -12,9 +12,9 @@ import Contacts
 
 @objc(ContactsPlugin)
 public class ContactsPlugin: CAPPlugin {
-    
+
     private let birthdayFormatter = DateFormatter()
-    
+
     override public func load() {
         // You must set the time zone from your default time zone to UTC +0,
         // which is what birthdays in Contacts are set to.
@@ -37,14 +37,14 @@ public class ContactsPlugin: CAPPlugin {
             }
         }
     }
-    
+
     @objc func getContacts(_ call: CAPPluginCall) {
-        var contactsArray : [PluginCallResultData] = [];
+        var contactsArray: [PluginCallResultData] = []
         Permissions.contactPermission { granted in
             if granted {
                 do {
                     let contacts = try Contacts.getContactFromCNContact()
-                    
+
                     for contact in contacts {
                         var phoneNumbers: [PluginCallResultData] = []
                         var emails: [PluginCallResultData] = []
@@ -67,13 +67,12 @@ public class ContactsPlugin: CAPPlugin {
                                 "address": emailToAppend
                             ])
                         }
-                        
-                        
+
                         var contactResult: PluginCallResultData = [
                             "contactId": contact.identifier,
                             "displayName": "\(contact.givenName) \(contact.familyName)",
                             "phoneNumbers": phoneNumbers,
-                            "emails": emails,
+                            "emails": emails
                         ]
                         if let photoThumbnail = contact.thumbnailImageData {
                             contactResult["photoThumbnail"] = "data:image/png;base64,\(photoThumbnail.base64EncodedString())"
@@ -98,7 +97,7 @@ public class ContactsPlugin: CAPPlugin {
             }
         }
     }
-    
+
     /**
      * [WIP]
      *
@@ -111,15 +110,15 @@ public class ContactsPlugin: CAPPlugin {
                 return
             }
         }
-        
+
         let searchString = call.getString("searchString", "")
         if searchString == "" {
             return getContacts(call)
         }
-        
+
         do {
             let contacts = try Contacts.findContacts(withName: searchString)
-            
+
             call.resolve([
                 "contacts": contacts
             ])
@@ -127,7 +126,7 @@ public class ContactsPlugin: CAPPlugin {
             call.reject("Error during find contacts", error as? String)
         }
     }
-    
+
     @objc func saveContact(_ call: CAPPluginCall) {
         Permissions.contactPermission { granted in
             if !granted {
@@ -135,28 +134,28 @@ public class ContactsPlugin: CAPPlugin {
                 return
             }
         }
-        
+
         let contact = CNMutableContact()
 
         contact.contactType = CNContactType(rawValue: call.getInt("contactType", 0))!
 
         // Name information
-        
+
         contact.namePrefix = call.getString("namePrefix", "")
         contact.givenName = call.getString("givenName", "")
         contact.middleName = call.getString("middleName", "")
         contact.familyName = call.getString("familyName", "")
         contact.nameSuffix = call.getString("nameSuffix", "")
         contact.nickname = call.getString("nickname", "")
-        
+
         // Work information
-        
+
         contact.jobTitle = call.getString("jobTitle", "")
         contact.departmentName = call.getString("departmentName", "")
         contact.organizationName = call.getString("organizationName", "")
-        
+
         // Addresses
-        
+
         for value in call.getArray("emailAddresses", JSObject.self) ?? [] {
             if let address = value["address"] as? NSString {
                 contact.emailAddresses.append(CNLabeledValue(
@@ -165,7 +164,7 @@ public class ContactsPlugin: CAPPlugin {
                 ))
             }
         }
-        
+
         for value in call.getArray("urlAddresses", JSObject.self) ?? [] {
             if let url = value["url"] as? NSString {
                 contact.urlAddresses.append(CNLabeledValue(
@@ -174,7 +173,7 @@ public class ContactsPlugin: CAPPlugin {
                 ))
             }
         }
-        
+
         for value in call.getArray("postalAddresses", JSObject.self) ?? [] {
             if let address = value["address"] as? JSObject {
                 contact.postalAddresses.append(CNLabeledValue(
@@ -183,10 +182,9 @@ public class ContactsPlugin: CAPPlugin {
                 ))
             }
         }
-        
-        
+
         // Other
-        
+
         for value in call.getArray("phoneNumbers", JSObject.self) ?? [] {
             if let number = value["number"] as? String {
                 contact.phoneNumbers.append(CNLabeledValue(
@@ -195,13 +193,13 @@ public class ContactsPlugin: CAPPlugin {
                 ))
             }
         }
-        
+
         contact.note = call.getString("note", "")
-        
+
         if let birthday = self.birthdayFormatter.date(from: call.getString("birthday", "")) {
             contact.birthday = Calendar.current.dateComponents([.day, .month, .year], from: birthday)
         }
-        
+
         for value in call.getArray("socialProfiles", JSObject.self) ?? [] {
             if let profile = value["profile"] as? JSObject {
                 contact.socialProfiles.append(CNLabeledValue(
@@ -215,12 +213,12 @@ public class ContactsPlugin: CAPPlugin {
                 ))
             }
         }
-        
+
         // --- Save
-        
+
         do {
             let saveRequest = CNSaveRequest()
-            saveRequest.add(contact, toContainerWithIdentifier:nil)
+            saveRequest.add(contact, toContainerWithIdentifier: nil)
             try CNContactStore().execute(saveRequest)
             call.resolve()
         } catch let error as NSError {
