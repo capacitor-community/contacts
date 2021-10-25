@@ -5,23 +5,20 @@ import type { ContactsPlugin, PermissionStatus, Contact } from './definitions';
 
 export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
   constructor() {
-    super({
-      name: 'CapContacts',
-      platforms: ['web'],
-    });
+    super();
   }
 
   async getPermissions(): Promise<PermissionStatus> {
-    throw new Error('getPermission not available');
+    throw this.unimplemented('getPermissions - Not implemented on web.');
   }
 
   async getContacts(): Promise<{ contacts: Contact[] }> {
-    throw new Error('getContacts not available');
+    throw this.unimplemented('getContacts - Not implemented on web.');
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async saveContact(_: NewContact): Promise<void> {
-    throw new Error('getContacts not available');
+    throw this.unimplemented('saveContact - Not implemented on web.');
   }
 }
 
