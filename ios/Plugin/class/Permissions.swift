@@ -19,7 +19,7 @@ class Permissions {
         case .denied:
             completionHandler(false)
         case .restricted, .notDetermined:
-            contactStore.requestAccess(for: .contacts) { granted, error in
+            contactStore.requestAccess(for: .contacts) { granted, _ in
                 if granted {
                     completionHandler(true)
                 } else {
@@ -31,5 +31,3 @@ class Permissions {
         }
     }
 }
-
-
