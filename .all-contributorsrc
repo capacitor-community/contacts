@@ -65,15 +65,6 @@
         "code",
         "doc"
       ]
-    },
-    {
-      "login": "reslear",
-      "name": "reslear",
-      "avatar_url": "https://avatars.githubusercontent.com/u/12596485?v=4",
-      "profile": "https://t.me/reslear",
-      "contributions": [
-        "doc"
-      ]
     }
   ],
   "contributorsPerLine": 7,
