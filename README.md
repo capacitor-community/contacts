@@ -10,10 +10,10 @@
   <img src="https://img.shields.io/maintenance/yes/2021?style=flat-square" />
   <a href="https://github.com/capacitor-community/contacts/actions?query=workflow%3A%22Test+and+Build+Plugin%22"><img src="https://img.shields.io/github/workflow/status/capacitor-community/contacts/Test%20and%20Build%20Plugin?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/l/@capacitor-community/contacts?style=flat-square" /></a>
-<br>
+  <br>
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/dw/@capacitor-community/contacts?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts"><img src="https://img.shields.io/npm/v/@capacitor-community/contacts?style=flat-square" /></a>
-
+</p>
 
 ## Maintainers
 
@@ -37,7 +37,7 @@ cd my-app
 npm install --save @capacitor/core @capacitor/cli
 ```
 
-Initalize Capacitor
+Initialize Capacitor
 
 ```
 npx cap init
@@ -82,7 +82,7 @@ Give it a value like:
 
 ### Android Notes
 
-For Android you have to add the permisions in your AndroidManifest.xml. Add the following permissions before the closing of the "manifest" tag.
+For Android you have to add the permissions in your AndroidManifest.xml. Add the following permissions before the closing of the "manifest" tag.
 
 ```
 <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -119,13 +119,12 @@ export interface ContactsPlugin {
 }
 ```
 
-If you're considering to use this plugin you most likely want to retrive contacts a users contacts:
+If you're considering to use this plugin you most likely want to retrieve contacts a users contacts:
 
 Import the Plugin in your TS file:
 
 ```
-import { Plugins } from "@capacitor/core";
-const  { Contacts } = Plugins;
+import { Contacts } from '@capacitor-community/contacts'
 ```
 
 Next use it and console log the result:
@@ -140,7 +139,7 @@ Contacts.getContacts().then(result => {
 
 ```
 
-That's it. Do Whatever you want with the retrived contacts.
+That's it. Do Whatever you want with the retrieved contacts.
 
 If you're trying to build something like "contacts matching" based on phone numbers i recommend using google libphonenumber: https://www.npmjs.com/package/google-libphonenumber
 
@@ -207,12 +206,9 @@ MIT
 </table>
 
 <!-- markdownlint-restore -->
+<!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-<!-- prettier-ignore -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
 
 ## API
 
@@ -220,7 +216,9 @@ MIT
 
 * [`getPermissions()`](#getpermissions)
 * [`getContacts()`](#getcontacts)
+* [`saveContact(...)`](#savecontact)
 * [Interfaces](#interfaces)
+* [Enums](#enums)
 
 </docgen-index>
 
@@ -243,6 +241,21 @@ getPermissions() => any
 ```typescript
 getContacts() => any
 ```
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### saveContact(...)
+
+```typescript
+saveContact(contact: NewContact) => any
+```
+
+| Param         | Type                                              |
+| ------------- | ------------------------------------------------- |
+| **`contact`** | <code><a href="#newcontact">NewContact</a></code> |
 
 **Returns:** <code>any</code>
 
@@ -287,5 +300,66 @@ getContacts() => any
 | ------------- | ------------------- |
 | **`label`**   | <code>string</code> |
 | **`address`** | <code>string</code> |
+
+
+#### NewContact
+
+New contact schema.
+
+| Prop                   | Type                                                | Description  |
+| ---------------------- | --------------------------------------------------- | ------------ |
+| **`contactType`**      | <code><a href="#contacttype">ContactType</a></code> |              |
+| **`namePrefix`**       | <code>string</code>                                 |              |
+| **`givenName`**        | <code>string</code>                                 |              |
+| **`middleName`**       | <code>string</code>                                 |              |
+| **`familyName`**       | <code>string</code>                                 |              |
+| **`nameSuffix`**       | <code>string</code>                                 |              |
+| **`nickname`**         | <code>string</code>                                 |              |
+| **`jobTitle`**         | <code>string</code>                                 |              |
+| **`departmentName`**   | <code>string</code>                                 |              |
+| **`organizationName`** | <code>string</code>                                 |              |
+| **`postalAddresses`**  | <code>{}</code>                                     |              |
+| **`emailAddresses`**   | <code>{}</code>                                     |              |
+| **`urlAddresses`**     | <code>{}</code>                                     |              |
+| **`phoneNumbers`**     | <code>{}</code>                                     |              |
+| **`birthday`**         | <code>string</code>                                 |              |
+| **`note`**             | <code>string</code>                                 |              |
+| **`socialProfiles`**   | <code>{}</code>                                     |              |
+| **`image`**            | <code>string</code>                                 | Base64 image |
+
+
+#### PostalAddress
+
+| Prop          | Type                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------- |
+| **`label`**   | <code>string</code>                                                                                     |
+| **`address`** | <code>{ street?: string; city?: string; state?: string; postalCode?: string; country?: string; }</code> |
+
+
+#### UrlAddress
+
+| Prop        | Type                |
+| ----------- | ------------------- |
+| **`label`** | <code>string</code> |
+| **`url`**   | <code>string</code> |
+
+
+#### SocialProfile
+
+| Prop          | Type                                                                      |
+| ------------- | ------------------------------------------------------------------------- |
+| **`label`**   | <code>string</code>                                                       |
+| **`profile`** | <code>{ username?: string; service?: string; urlString?: string; }</code> |
+
+
+### Enums
+
+
+#### ContactType
+
+| Members            |
+| ------------------ |
+| **`Person`**       |
+| **`Organization`** |
 
 </docgen-api>
