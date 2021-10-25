@@ -57,17 +57,21 @@
       ]
     },
     {
-      "login": "reslear",
-      "name": "reslear",
-      "avatar_url": "https://avatars.githubusercontent.com/u/12596485?v=4",
-      "profile": "https://t.me/reslear",
-      "contributions": [
       "login": "muuvmuuv",
       "name": "Marvin Heilemann",
       "avatar_url": "https://avatars.githubusercontent.com/u/11534760?v=4",
       "profile": "https://marvin.digital/",
       "contributions": [
         "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "reslear",
+      "name": "reslear",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12596485?v=4",
+      "profile": "https://t.me/reslear",
+      "contributions": [
         "doc"
       ]
     }
