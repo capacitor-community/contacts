@@ -14,6 +14,7 @@ export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
 
   async getContacts(): Promise<{ contacts: Contact[] }> {
     throw this.unimplemented('getContacts - Not implemented on web.');
+  }
   
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async saveContact(_: NewContact): Promise<void> {
