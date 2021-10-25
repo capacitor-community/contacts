@@ -196,13 +196,16 @@ MIT
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Idrimi"><img src="https://avatars0.githubusercontent.com/u/24573405?v=4?s=100" width="100px;" alt=""/><br /><sub><b>idrimi</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=Idrimi" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/tafelnl"><img src="https://avatars2.githubusercontent.com/u/35837839?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tafel</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=tafelnl" title="Code">💻</a></td>
-    <td align="center"><a href="http://ionicframework.com/"><img src="https://avatars3.githubusercontent.com/u/11214?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Lynch</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=mlynch" title="Documentation">📖</a> <a href="#eventOrganizing-mlynch" title="Event Organizing">📋</a></td>
-    <td align="center"><a href="https://github.com/david-garzon-adl"><img src="https://avatars0.githubusercontent.com/u/45822796?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Javier Garzon Carrillo</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=david-garzon-adl" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/vhinic"><img src="https://avatars.githubusercontent.com/u/244439?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vladimir Hinić</b></sub></a><br /><a href="https://github.com/idrimi (Jonathan Gerber)/contacts/commits?author=vhinic" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Idrimi"><img src="https://avatars0.githubusercontent.com/u/24573405?v=4?s=100" width="100px;" alt=""/><br /><sub><b>idrimi</b></sub></a><br /><a href="https://github.com/capacitor-community/contacts/commits?author=Idrimi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tafelnl"><img src="https://avatars2.githubusercontent.com/u/35837839?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tafel</b></sub></a><br /><a href="https://github.com/capacitor-community/contacts/commits?author=tafelnl" title="Code">💻</a></td>
+    <td align="center"><a href="http://ionicframework.com/"><img src="https://avatars3.githubusercontent.com/u/11214?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Lynch</b></sub></a><br /><a href="https://github.com/capacitor-community/contacts/commits?author=mlynch" title="Documentation">📖</a> <a href="#eventOrganizing-mlynch" title="Event Organizing">📋</a></td>
+    <td align="center"><a href="https://github.com/david-garzon-adl"><img src="https://avatars0.githubusercontent.com/u/45822796?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Javier Garzon Carrillo</b></sub></a><br /><a href="https://github.com/capacitor-community/contacts/commits?author=david-garzon-adl" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vhinic"><img src="https://avatars.githubusercontent.com/u/244439?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vladimir Hinić</b></sub></a><br /><a href="https://github.com/capacitor-community/contacts/commits?author=vhinic" title="Code">💻</a></td>
+    <td align="center"><a href="https://marvin.digital/"><img src="https://avatars.githubusercontent.com/u/11534760?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marvin Heilemann</b></sub></a><br /><a href="https://github.com/capacitor-community/contacts/commits?author=muuvmuuv" title="Code">💻</a> <a href="https://github.com/capacitor-community/contacts/commits?author=muuvmuuv" title="Documentation">📖</a></td>
   </tr>
 </table>
+
+<!-- markdownlint-restore -->
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
