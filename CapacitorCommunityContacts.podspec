@@ -1,13 +1,17 @@
+require 'json'
 
-  Pod::Spec.new do |s|
-    s.name = 'CapacitorCommunityContacts'
-    s.version = '1.0.6'
-    s.summary = 'Contacts Plugin for Capacitor'
-    s.license = 'MIT'
-    s.homepage = 'https://github.com/capacitor-community/contacts'
-    s.author = 'Jonathan Gerber'
-    s.source = { :git => 'https://github.com/capacitor-community/contacts', :tag => s.version.to_s }
-    s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
-    s.ios.deployment_target  = '12.0'
-    s.dependency 'Capacitor'
-  end
+package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+
+Pod::Spec.new do |s|
+  s.name = 'CapacitorCommunityContacts'
+  s.version = package['version']
+  s.summary = package['description']
+  s.license = package['license']
+  s.homepage = package['repository']['url']
+  s.author = package['author']
+  s.source = { :git => package['repository']['url'], :tag => s.version.to_s }
+  s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
+  s.ios.deployment_target  = '12.0'
+  s.dependency 'Capacitor'
+  s.swift_version = '5.1'
+end

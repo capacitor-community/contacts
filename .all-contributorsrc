@@ -1,6 +1,6 @@
 {
   "projectName": "contacts",
-  "projectOwner": "idrimi (Jonathan Gerber)",
+  "projectOwner": "capacitor-community",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -55,7 +55,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "muuvmuuv",
+      "name": "Marvin Heilemann",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11534760?v=4",
+      "profile": "https://marvin.digital/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
