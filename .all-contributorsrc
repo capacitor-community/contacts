@@ -1,6 +1,6 @@
 {
   "projectName": "contacts",
-  "projectOwner": "idrimi (Jonathan Gerber)",
+  "projectOwner": "capacitor-community",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -55,7 +55,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "reslear",
+      "name": "reslear",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12596485?v=4",
+      "profile": "https://t.me/reslear",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
