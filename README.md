@@ -32,20 +32,20 @@ https://github.com/byrdsandbytes/capContactsDemo
 
 Setup your project with Capacitor. For details check here: https://capacitorjs.com
 
-```
+```sh
 cd my-app
 npm install --save @capacitor/core @capacitor/cli
 ```
 
 Initialize Capacitor
 
-```
+```sh
 npx cap init
 ```
 
 Add the platforms you want to use.
 
-```
+```sh
 npx cap add android
 npx cap add ios
 npx cap add electron
@@ -55,13 +55,19 @@ npx cap add electron
 
 Install:
 
-```
+```sh
 npm i --save @capacitor-community/contacts
+
+# or yarn
+yarn add @capacitor-community/contacts
+
+# or pnpm
+pnpm add @capacitor-community/contacts
 ```
 
 Sync:
 
-```
+```sh
 npx cap sync
 ```
 
@@ -84,25 +90,25 @@ Give it a value like:
 
 For Android you have to add the permissions in your AndroidManifest.xml. Add the following permissions before the closing of the "manifest" tag.
 
-```
+```xml
 <uses-permission android:name="android.permission.READ_CONTACTS" />
 <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
 ```
 
 Next import the capContacts class to your MainActivity
 
-```
+```java
 // Initializes the Bridge
-    this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
-      // Additional plugins you've installed go here
-      // Ex: add(TotallyAwesomePlugin.class);
-      add(Contacts.class);
-    }});
+this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
+  // Additional plugins you've installed go here
+  // Ex: add(TotallyAwesomePlugin.class);
+  add(Contacts.class);
+}});
 ```
 
 Make sure to import it properly as well.
 
-```
+```java
 import ch.byrds.capacitor.contacts.Contacts;
 ```
 
@@ -112,10 +118,11 @@ import ch.byrds.capacitor.contacts.Contacts;
 
 You have the following Methods available:
 
-```
+```ts
 export interface ContactsPlugin {
   getPermissions(): Promise<PermissionStatus>;
   getContacts(): Promise<{contacts: Contact[]}>;
+  saveContact(contact: NewContact): Promise<void>;
 }
 ```
 
@@ -123,13 +130,13 @@ If you're considering to use this plugin you most likely want to retrieve contac
 
 Import the Plugin in your TS file:
 
-```
+```ts
 import { Contacts } from '@capacitor-community/contacts'
 ```
 
 Next use it and console log the result:
 
-```
+```ts
 Contacts.getContacts().then(result => {
     console.log(result);
     for (const contact of result.contacts) {
@@ -141,13 +148,13 @@ Contacts.getContacts().then(result => {
 
 That's it. Do Whatever you want with the retrieved contacts.
 
-If you're trying to build something like "contacts matching" based on phone numbers i recommend using google libphonenumber: https://www.npmjs.com/package/google-libphonenumber
+If you're trying to build something like "contacts matching" based on phone numbers, recommends using google [libphonenumber](https://www.npmjs.com/package/google-libphonenumber) based library [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber).
 
 In order to match them properly you need to format them before you can match or store them properly.
 
 ### Interfaces
 
-```
+```ts
 export interface PermissionStatus {
   granted: boolean;
 }
