@@ -28,6 +28,11 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+class ContactsPermission {
+    public static int DENIED = 2;
+    public static int AUTHORIZED = 3;
+}
+
 @CapacitorPlugin(
     name = "Contacts",
     //requestCodes is labeled as legacy in bridge
@@ -65,6 +70,17 @@ public class Contacts extends Plugin {
             result.put("granted", true);
             call.resolve(result);
         }
+    }
+
+    @PluginMethod
+    public void hasPermission(PluginCall call) {
+        JSObject result = new JSObject();
+        if(hasRequiredPermissions()){
+            result.put("status", ContactsPermission.AUTHORIZED);
+        } else {
+            result.put("status", ContactsPermission.DENIED);
+        }
+        call.resolve(result);
     }
 
     @Override

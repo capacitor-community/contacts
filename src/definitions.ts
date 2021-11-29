@@ -6,12 +6,33 @@
 
 export interface ContactsPlugin {
   getPermissions(): Promise<PermissionStatus>;
+  hasPermission(): Promise<GrantStatus>;
   getContacts(): Promise<{ contacts: Contact[] }>;
   saveContact(contact: NewContact): Promise<void>;
 }
 
 export interface PermissionStatus {
   granted: boolean;
+}
+
+export enum PermissionGrantStatus {
+  /** The user has not yet made a choice regarding whether the application may access contact data. */
+  NOT_DETERMINED = 0,
+
+  /** The application is not authorized to access contact data.
+   *  The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place. */
+  RESTRICTED = 1,
+
+  /** The user explicitly denied access to contact data for the application. */
+  DENIED = 2,
+
+  /** The application is authorized to access contact data. */
+  AUTHORIZED = 3,
+
+}
+
+export interface GrantStatus {
+  status: PermissionGrantStatus;
 }
 
 export interface PhoneNumber {

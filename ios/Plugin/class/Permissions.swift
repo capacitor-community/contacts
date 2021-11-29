@@ -9,11 +9,17 @@
 import Foundation
 import Contacts
 
+
+
 class Permissions {
 
+    class func hasPermission() -> CNAuthorizationStatus {
+        return CNContactStore.authorizationStatus(for: .contacts)
+    }
+    
     class func contactPermission(completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
         let contactStore = CNContactStore()
-        switch CNContactStore.authorizationStatus(for: .contacts) {
+        switch hasPermission() {
         case .authorized:
             completionHandler(true)
         case .denied:
