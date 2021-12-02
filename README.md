@@ -237,10 +237,10 @@ MIT
 ### getPermissions()
 
 ```typescript
-getPermissions() => any
+getPermissions() => Promise<PermissionStatus>
 ```
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
 --------------------
 
@@ -248,10 +248,10 @@ getPermissions() => any
 ### hasPermission()
 
 ```typescript
-hasPermission() => any
+hasPermission() => Promise<GrantStatus>
 ```
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#grantstatus">GrantStatus</a>&gt;</code>
 
 --------------------
 
@@ -259,10 +259,10 @@ hasPermission() => any
 ### getContacts()
 
 ```typescript
-getContacts() => any
+getContacts() => Promise<{ contacts: Contact[]; }>
 ```
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;{ contacts: Contact[]; }&gt;</code>
 
 --------------------
 
@@ -270,14 +270,12 @@ getContacts() => any
 ### saveContact(...)
 
 ```typescript
-saveContact(contact: NewContact) => any
+saveContact(contact: NewContact) => Promise<void>
 ```
 
 | Param         | Type                                              |
 | ------------- | ------------------------------------------------- |
 | **`contact`** | <code><a href="#newcontact">NewContact</a></code> |
-
-**Returns:** <code>any</code>
 
 --------------------
 
@@ -301,16 +299,16 @@ saveContact(contact: NewContact) => any
 
 #### Contact
 
-| Prop                   | Type                |
-| ---------------------- | ------------------- |
-| **`contactId`**        | <code>string</code> |
-| **`displayName`**      | <code>string</code> |
-| **`phoneNumbers`**     | <code>{}</code>     |
-| **`emails`**           | <code>{}</code>     |
-| **`photoThumbnail`**   | <code>string</code> |
-| **`organizationName`** | <code>string</code> |
-| **`organizationRole`** | <code>string</code> |
-| **`birthday`**         | <code>string</code> |
+| Prop                   | Type                        |
+| ---------------------- | --------------------------- |
+| **`contactId`**        | <code>string</code>         |
+| **`displayName`**      | <code>string</code>         |
+| **`phoneNumbers`**     | <code>PhoneNumber[]</code>  |
+| **`emails`**           | <code>EmailAddress[]</code> |
+| **`photoThumbnail`**   | <code>string</code>         |
+| **`organizationName`** | <code>string</code>         |
+| **`organizationRole`** | <code>string</code>         |
+| **`birthday`**         | <code>string</code>         |
 
 
 #### PhoneNumber
@@ -345,13 +343,13 @@ New contact schema.
 | **`jobTitle`**         | <code>string</code>                                 |              |
 | **`departmentName`**   | <code>string</code>                                 |              |
 | **`organizationName`** | <code>string</code>                                 |              |
-| **`postalAddresses`**  | <code>{}</code>                                     |              |
-| **`emailAddresses`**   | <code>{}</code>                                     |              |
-| **`urlAddresses`**     | <code>{}</code>                                     |              |
-| **`phoneNumbers`**     | <code>{}</code>                                     |              |
+| **`postalAddresses`**  | <code>PostalAddress[]</code>                        |              |
+| **`emailAddresses`**   | <code>EmailAddress[]</code>                         |              |
+| **`urlAddresses`**     | <code>UrlAddress[]</code>                           |              |
+| **`phoneNumbers`**     | <code>PhoneNumber[]</code>                          |              |
 | **`birthday`**         | <code>string</code>                                 |              |
 | **`note`**             | <code>string</code>                                 |              |
-| **`socialProfiles`**   | <code>{}</code>                                     |              |
+| **`socialProfiles`**   | <code>SocialProfile[]</code>                        |              |
 | **`image`**            | <code>string</code>                                 | Base64 image |
 
 
