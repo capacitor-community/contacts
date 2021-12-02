@@ -43,7 +43,7 @@
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
     "prepare": "npm run build",
-    "postinstall": "npm run build"
+    "postinstall": "npm install && npm run build"
   },
   "devDependencies": {
     "@capacitor/android": "^3.3.2",
