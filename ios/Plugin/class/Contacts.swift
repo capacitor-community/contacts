@@ -17,6 +17,7 @@ class Contacts {
 
         let keysToFetch = [
             CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+            CNContactPostalAddressesKey,
             CNContactPhoneNumbersKey,
             CNContactGivenNameKey,
             CNContactMiddleNameKey,

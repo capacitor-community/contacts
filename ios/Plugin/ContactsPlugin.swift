@@ -44,10 +44,14 @@ public class ContactsPlugin: CAPPlugin {
             if granted {
                 do {
                     let contacts = try Contacts.getContactFromCNContact()
+                    let addressFormatter = CNPostalAddressFormatter()
+
 
                     for contact in contacts {
+                        
                         var phoneNumbers: [PluginCallResultData] = []
                         var emails: [PluginCallResultData] = []
+                        var postalAddresses: [PluginCallResultData] = []
                         for number in contact.phoneNumbers {
                             let numberToAppend = number.value.stringValue
                             let label = number.label ?? ""
@@ -68,11 +72,26 @@ public class ContactsPlugin: CAPPlugin {
                             ])
                         }
 
+                        for address in contact.postalAddresses {
+                            let label = address.label ?? ""
+                            let labelToAppend = CNLabeledValue<NSString>.localizedString(forLabel: label)
+                            postalAddresses.append([
+                                "street": address.value.street as String,
+                                "city": address.value.city as String,
+                                "state": address.value.state as String,
+                                "postalCode": address.value.postalCode as String,
+                                "appleLabel": labelToAppend,
+                                "postalString": addressFormatter.string(from:address.value)
+                            ])
+                        }
+                   
+
                         var contactResult: PluginCallResultData = [
                             "contactId": contact.identifier,
                             "displayName": "\(contact.givenName) \(contact.familyName)",
                             "phoneNumbers": phoneNumbers,
-                            "emails": emails
+                            "emails": emails,
+                            "addresses": postalAddresses
                         ]
                         if let photoThumbnail = contact.thumbnailImageData {
                             contactResult["photoThumbnail"] = "data:image/png;base64,\(photoThumbnail.base64EncodedString())"
