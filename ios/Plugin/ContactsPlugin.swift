@@ -84,7 +84,10 @@ public class ContactsPlugin: CAPPlugin {
                         }
                             
                         if !contact.organizationName.isEmpty {
-                            contactResult["organizationName"] = contact.organizationName
+                            contactResult["organizationName"] = contact.organizationName   
+                        }
+                        
+                        if !contact.jobTitle.isEmpty {
                             contactResult["organizationRole"] = contact.jobTitle
                         }
                         
