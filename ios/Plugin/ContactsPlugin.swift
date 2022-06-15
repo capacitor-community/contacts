@@ -74,16 +74,20 @@ public class ContactsPlugin: CAPPlugin {
                             "phoneNumbers": phoneNumbers,
                             "emails": emails
                         ]
+                        
                         if let photoThumbnail = contact.thumbnailImageData {
                             contactResult["photoThumbnail"] = "data:image/png;base64,\(photoThumbnail.base64EncodedString())"
-                            if let birthday = contact.birthday?.date {
-                                contactResult["birthday"] = self.birthdayFormatter.string(from: birthday)
-                            }
-                            if !contact.organizationName.isEmpty {
-                                contactResult["organizationName"] = contact.organizationName
-                                contactResult["organizationRole"] = contact.jobTitle
-                            }
                         }
+                        
+                        if let birthday = contact.birthday?.date {
+                            contactResult["birthday"] = self.birthdayFormatter.string(from: birthday)
+                        }
+                            
+                        if !contact.organizationName.isEmpty {
+                            contactResult["organizationName"] = contact.organizationName
+                            contactResult["organizationRole"] = contact.jobTitle
+                        }
+                        
                         contactsArray.append(contactResult)
                     }
                     call.resolve([
