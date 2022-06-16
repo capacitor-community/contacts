@@ -1,5 +1,5 @@
 {
-  "name": "@rea.ch/capacitor-contacts",
+  "name": "@capacitor-community/contacts",
   "version": "1.2.0",
   "description": "Contacts Plugin for Capacitor",
   "main": "dist/plugin.cjs.js",
@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/myreach-sa/contacts.git"
+    "url": "git+https://github.com/capacitor-community/contacts.git"
   },
   "bugs": {
-    "url": "https://github.com/myreach-sa/contacts/issues"
+    "url": "https://github.com/capacitor-community/contacts/issues"
   },
   "keywords": [
     "capacitor",
