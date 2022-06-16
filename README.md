@@ -236,10 +236,10 @@ MIT
 ### getPermissions()
 
 ```typescript
-getPermissions() => Promise<PermissionStatus>
+getPermissions() => any
 ```
 
-**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
+**Returns:** <code>any</code>
 
 --------------------
 
@@ -247,10 +247,10 @@ getPermissions() => Promise<PermissionStatus>
 ### getContacts()
 
 ```typescript
-getContacts() => Promise<{ contacts: Contact[]; }>
+getContacts() => any
 ```
 
-**Returns:** <code>Promise&lt;{ contacts: {}; }&gt;</code>
+**Returns:** <code>any</code>
 
 --------------------
 
@@ -258,12 +258,14 @@ getContacts() => Promise<{ contacts: Contact[]; }>
 ### saveContact(...)
 
 ```typescript
-saveContact(contact: NewContact) => Promise<void>
+saveContact(contact: NewContact) => any
 ```
 
 | Param         | Type                                              |
 | ------------- | ------------------------------------------------- |
 | **`contact`** | <code><a href="#newcontact">NewContact</a></code> |
+
+**Returns:** <code>any</code>
 
 --------------------
 
