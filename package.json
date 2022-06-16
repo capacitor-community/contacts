@@ -1,6 +1,6 @@
 {
   "name": "@rea.ch/capacitor-contacts",
-  "version": "1.2.1",
+  "version": "1.2.0",
   "description": "Contacts Plugin for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "Rea.chCapacitorContacts.podspec"
+    "CapacitorCommunityContacts.podspec"
   ],
   "author": "Jonathan Gerber",
   "license": "MIT",
