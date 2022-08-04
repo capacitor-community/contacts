@@ -1,6 +1,6 @@
 {
   "name": "@textable-app/contacts",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Contacts Plugin for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorCommunityContacts.podspec"
+    "TextableAppContacts.podspec"
   ],
   "author": "Jonathan Gerber",
   "license": "MIT",
