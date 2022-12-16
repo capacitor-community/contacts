@@ -27,16 +27,6 @@
 
 This plugin enables you to access the native contacts APIs of iOS and Android. It allows you to retrieve, create and delete contacts.
 
-## Documentation
+## Limitations
 
-Extensive documentation is available [here](https://capacitor-community.github.io/capacitor-contacts/).
-
-## Shortcuts
-
-- [Documentation homepage](https://capacitor-community.github.io/capacitor-contacts/)
-
-- [Installation](https://capacitor-community.github.io/capacitor-contacts/#/getting-started/installation)
-
-- [API reference](https://capacitor-community.github.io/capacitor-contacts/#/api)
-
-<!-- - [Examples](https://github.com/capacitor-community/contacts-examples) -->
+This plugins only adds support for using the native iOS and Android APIs. If you want to make use of the JavaScript API as well (for a possible webapp) you should implement that separately. Of course it should be possible to integrate this into the plugin in the future. If you want to help out with this, please start a PR.
