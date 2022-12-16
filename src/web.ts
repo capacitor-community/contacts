@@ -1,27 +1,10 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { NewContact } from '.';
-import type { ContactsPlugin, PermissionStatus, Contact } from './definitions';
+import type { ContactsPlugin } from './definitions';
 
-export class ContactsPluginWeb extends WebPlugin implements ContactsPlugin {
-  constructor() {
-    super();
-  }
-
-  async getPermissions(): Promise<PermissionStatus> {
-    throw this.unimplemented('getPermissions - Not implemented on web.');
-  }
-
-  async getContacts(): Promise<{ contacts: Contact[] }> {
-    throw this.unimplemented('getContacts - Not implemented on web.');
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async saveContact(_: NewContact): Promise<void> {
-    throw this.unimplemented('saveContact - Not implemented on web.');
+export class ContactsWeb extends WebPlugin implements ContactsPlugin {
+  async echo(options: { value: string }): Promise<{ value: string }> {
+    console.log('ECHO', options);
+    return options;
   }
 }
-
-const Contacts = new ContactsPluginWeb();
-
-export { Contacts };

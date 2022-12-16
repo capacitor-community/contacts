@@ -1,5 +1,3 @@
-
-  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="ch.byrds.capacitor.contacts.contacts">
-  </manifest>
-  
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="getcapacitor.community.contacts">
+</manifest>
