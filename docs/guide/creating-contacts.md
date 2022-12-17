@@ -43,3 +43,9 @@ const createNewContact = async () => {
   console.log(res.contactId);
 };
 ```
+
+## About `type` and `label`
+
+`PhoneInput`, `EmailInput` and `PostalAddressInput` all have both a `type` and `label` field attached to them. With `type` you can indicate which type of phone, email of postal address it is. For example `.Home` or `.Work`.
+
+You can also supply `.Custom`. In that case you can provide the `label` field with any arbitrary string value, for example `"foobar"`.

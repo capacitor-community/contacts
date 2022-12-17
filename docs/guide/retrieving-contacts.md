@@ -42,3 +42,7 @@ All fields available for `projection` can be found in the [API reference](/#/api
 ## About `contactId`
 
 Both Android and iOS, unfortunately, do not garantuee the `contactId` will always remain the same. In fact, they can change quite regularly, for example when a contact is updated. So always be sure to retrieve a fresh list of contacts before using the `contactId` to, for example, delete a contact.
+
+## About `type` and `label`
+
+`PhonePayload`, `EmailPayload` and `PostalAddressPayload` all have both a `type` and `label` field attached to them. The `PostalAddressPayload.type` can be `PostalAddressType.Home` for example, indicating that this is the contact's home address. `type` can also be `.Custom`. In that case the `label` field will be available and supplied with the custom value. This can be any arbitrary string value, for example `"foobar"`.
