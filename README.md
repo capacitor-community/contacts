@@ -27,6 +27,30 @@
 
 This plugin enables you to access the native contacts APIs of iOS and Android. It allows you to retrieve, create and delete contacts.
 
+## Versions
+
+Currently there are two actively maintained versions of this plugin. The API of these versions is identical. The only difference between the two versions is the supported Capacitor versions.
+
+| Plugin | Capacitor | Status | Documentation                                           |
+| ------ | --------- | ------ | ------------------------------------------------------- |
+| v4.x   | v4.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
+| v3.x   | v3.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
+
+If you are installing this plugin into a new project, you can ignore the following explanation.
+
+In the past a few other versions of this plugin were released, also targeting different versions of Capacitor:
+
+| Plugin        | Capacitor | Status     | Documentation                                                                                                   |
+| ------------- | --------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
+| v2.x          | v4.x      | Deprecated | [Link](https://github.com/capacitor-community/contacts/blob/v2.0.0/README.md)                                   |
+| v1.0.9 and up | v3.x      | Deprecated | [Link](https://github.com/capacitor-community/contacts/blob/1.1.3/README.md)                                    |
+| v1.0.0 and up | v2.x      | Deprecated | [Link](https://github.com/capacitor-community/contacts/blob/0cb99be68dc8ee4547c75f932872bd065f5509d2/README.md) |
+| v0.x          | v2.x      | Deprecated | [Link](https://github.com/capacitor-community/contacts/blob/0.1.1/README.md)                                    |
+
+Admittedly, this wasn't the most consistent versioning strategy, and we'll keep it more coherent in the future.
+
+It's highly recommended to upgrade to either v3 or v4 if you are using an old version!
+
 ## Documentation
 
 Extensive documentation is available [here](https://capacitor-community.github.io/capacitor-contacts/).
