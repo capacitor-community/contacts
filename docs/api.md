@@ -9,7 +9,7 @@
 checkPermissions() => Promise<PermissionStatus>
 ```
 
-**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
+**Returns:** <code>Promise&lt;[PermissionStatus](#permissionstatus)&gt;</code>
 
 --------------------
 
@@ -20,7 +20,7 @@ checkPermissions() => Promise<PermissionStatus>
 requestPermissions() => Promise<PermissionStatus>
 ```
 
-**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
+**Returns:** <code>Promise&lt;[PermissionStatus](#permissionstatus)&gt;</code>
 
 --------------------
 
@@ -31,11 +31,11 @@ requestPermissions() => Promise<PermissionStatus>
 getContact(options: GetContactOptions) => Promise<GetContactResult>
 ```
 
-| Param         | Type                                                            |
-| ------------- | --------------------------------------------------------------- |
-| **`options`** | <code><a href="#getcontactoptions">GetContactOptions</a></code> |
+| Param         | Type                                                 |
+| ------------- | ---------------------------------------------------- |
+| **`options`** | <code>[GetContactOptions](#getcontactoptions)</code> |
 
-**Returns:** <code>Promise&lt;<a href="#getcontactresult">GetContactResult</a>&gt;</code>
+**Returns:** <code>Promise&lt;[GetContactResult](#getcontactresult)&gt;</code>
 
 --------------------
 
@@ -46,11 +46,11 @@ getContact(options: GetContactOptions) => Promise<GetContactResult>
 getContacts(options: GetContactsOptions) => Promise<GetContactsResult>
 ```
 
-| Param         | Type                                                              |
-| ------------- | ----------------------------------------------------------------- |
-| **`options`** | <code><a href="#getcontactsoptions">GetContactsOptions</a></code> |
+| Param         | Type                                                   |
+| ------------- | ------------------------------------------------------ |
+| **`options`** | <code>[GetContactsOptions](#getcontactsoptions)</code> |
 
-**Returns:** <code>Promise&lt;<a href="#getcontactsresult">GetContactsResult</a>&gt;</code>
+**Returns:** <code>Promise&lt;[GetContactsResult](#getcontactsresult)&gt;</code>
 
 --------------------
 
@@ -61,11 +61,11 @@ getContacts(options: GetContactsOptions) => Promise<GetContactsResult>
 createContact(options: CreateContactOptions) => Promise<CreateContactResult>
 ```
 
-| Param         | Type                                                                  |
-| ------------- | --------------------------------------------------------------------- |
-| **`options`** | <code><a href="#createcontactoptions">CreateContactOptions</a></code> |
+| Param         | Type                                                       |
+| ------------- | ---------------------------------------------------------- |
+| **`options`** | <code>[CreateContactOptions](#createcontactoptions)</code> |
 
-**Returns:** <code>Promise&lt;<a href="#createcontactresult">CreateContactResult</a>&gt;</code>
+**Returns:** <code>Promise&lt;[CreateContactResult](#createcontactresult)&gt;</code>
 
 --------------------
 
@@ -76,9 +76,9 @@ createContact(options: CreateContactOptions) => Promise<CreateContactResult>
 deleteContact(options: DeleteContactOptions) => Promise<void>
 ```
 
-| Param         | Type                                                                  |
-| ------------- | --------------------------------------------------------------------- |
-| **`options`** | <code><a href="#deletecontactoptions">DeleteContactOptions</a></code> |
+| Param         | Type                                                       |
+| ------------- | ---------------------------------------------------------- |
+| **`options`** | <code>[DeleteContactOptions](#deletecontactoptions)</code> |
 
 --------------------
 
@@ -89,9 +89,9 @@ deleteContact(options: DeleteContactOptions) => Promise<void>
 pickContact(options: PickContactOptions) => Promise<void>
 ```
 
-| Param         | Type                                                              |
-| ------------- | ----------------------------------------------------------------- |
-| **`options`** | <code><a href="#pickcontactoptions">PickContactOptions</a></code> |
+| Param         | Type                                                   |
+| ------------- | ------------------------------------------------------ |
+| **`options`** | <code>[PickContactOptions](#pickcontactoptions)</code> |
 
 --------------------
 
@@ -101,32 +101,32 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### PermissionStatus
 
-| Prop           | Type                                                        |
-| -------------- | ----------------------------------------------------------- |
-| **`contacts`** | <code><a href="#permissionstate">PermissionState</a></code> |
+| Prop           | Type                                             |
+| -------------- | ------------------------------------------------ |
+| **`contacts`** | <code>[PermissionState](#permissionstate)</code> |
 
 
 #### GetContactResult
 
-| Prop          | Type                                                      |
-| ------------- | --------------------------------------------------------- |
-| **`contact`** | <code><a href="#contactpayload">ContactPayload</a></code> |
+| Prop          | Type                                           |
+| ------------- | ---------------------------------------------- |
+| **`contact`** | <code>[ContactPayload](#contactpayload)</code> |
 
 
 #### ContactPayload
 
-| Prop                  | Type                                                                | Description                          |
-| --------------------- | ------------------------------------------------------------------- | ------------------------------------ |
-| **`contactId`**       | <code>string</code>                                                 |                                      |
-| **`name`**            | <code><a href="#namepayload">NamePayload</a></code>                 | Object holding the name data         |
-| **`organization`**    | <code><a href="#organizationpayload">OrganizationPayload</a></code> | Object holding the organization data |
-| **`birthday`**        | <code><a href="#birthdaypayload">BirthdayPayload</a> \| null</code> | Birthday                             |
-| **`note`**            | <code>string \| null</code>                                         | Note                                 |
-| **`phones`**          | <code>PhonePayload[]</code>                                         | Phones                               |
-| **`emails`**          | <code>EmailPayload[]</code>                                         | Emails                               |
-| **`urls`**            | <code>(string \| null)[]</code>                                     | URLs                                 |
-| **`postalAddresses`** | <code>PostalAddressPayload[]</code>                                 | Postal Addresses                     |
-| **`image`**           | <code><a href="#imagepayload">ImagePayload</a></code>               | Image                                |
+| Prop                  | Type                                                     | Description                          |
+| --------------------- | -------------------------------------------------------- | ------------------------------------ |
+| **`contactId`**       | <code>string</code>                                      |                                      |
+| **`name`**            | <code>[NamePayload](#namepayload)</code>                 | Object holding the name data         |
+| **`organization`**    | <code>[OrganizationPayload](#organizationpayload)</code> | Object holding the organization data |
+| **`birthday`**        | <code>[BirthdayPayload](#birthdaypayload) \| null</code> | Birthday                             |
+| **`note`**            | <code>string \| null</code>                              | Note                                 |
+| **`phones`**          | <code>PhonePayload[]</code>                              | Phones                               |
+| **`emails`**          | <code>EmailPayload[]</code>                              | Emails                               |
+| **`urls`**            | <code>(string \| null)[]</code>                          | URLs                                 |
+| **`postalAddresses`** | <code>PostalAddressPayload[]</code>                      | Postal Addresses                     |
+| **`image`**           | <code>[ImagePayload](#imagepayload)</code>               | Image                                |
 
 
 #### NamePayload
@@ -161,37 +161,37 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### PhonePayload
 
-| Prop            | Type                                            |
-| --------------- | ----------------------------------------------- |
-| **`type`**      | <code><a href="#phonetype">PhoneType</a></code> |
-| **`label`**     | <code>string \| null</code>                     |
-| **`isPrimary`** | <code>boolean \| null</code>                    |
-| **`number`**    | <code>string \| null</code>                     |
+| Prop            | Type                                 |
+| --------------- | ------------------------------------ |
+| **`type`**      | <code>[PhoneType](#phonetype)</code> |
+| **`label`**     | <code>string \| null</code>          |
+| **`isPrimary`** | <code>boolean \| null</code>         |
+| **`number`**    | <code>string \| null</code>          |
 
 
 #### EmailPayload
 
-| Prop            | Type                                            |
-| --------------- | ----------------------------------------------- |
-| **`type`**      | <code><a href="#emailtype">EmailType</a></code> |
-| **`label`**     | <code>string \| null</code>                     |
-| **`isPrimary`** | <code>boolean \| null</code>                    |
-| **`address`**   | <code>string \| null</code>                     |
+| Prop            | Type                                 |
+| --------------- | ------------------------------------ |
+| **`type`**      | <code>[EmailType](#emailtype)</code> |
+| **`label`**     | <code>string \| null</code>          |
+| **`isPrimary`** | <code>boolean \| null</code>         |
+| **`address`**   | <code>string \| null</code>          |
 
 
 #### PostalAddressPayload
 
-| Prop               | Type                                                            |
-| ------------------ | --------------------------------------------------------------- |
-| **`type`**         | <code><a href="#postaladdresstype">PostalAddressType</a></code> |
-| **`label`**        | <code>string \| null</code>                                     |
-| **`isPrimary`**    | <code>boolean \| null</code>                                    |
-| **`street`**       | <code>string \| null</code>                                     |
-| **`neighborhood`** | <code>string \| null</code>                                     |
-| **`city`**         | <code>string \| null</code>                                     |
-| **`region`**       | <code>string \| null</code>                                     |
-| **`postcode`**     | <code>string \| null</code>                                     |
-| **`country`**      | <code>string \| null</code>                                     |
+| Prop               | Type                                                 |
+| ------------------ | ---------------------------------------------------- |
+| **`type`**         | <code>[PostalAddressType](#postaladdresstype)</code> |
+| **`label`**        | <code>string \| null</code>                          |
+| **`isPrimary`**    | <code>boolean \| null</code>                         |
+| **`street`**       | <code>string \| null</code>                          |
+| **`neighborhood`** | <code>string \| null</code>                          |
+| **`city`**         | <code>string \| null</code>                          |
+| **`region`**       | <code>string \| null</code>                          |
+| **`postcode`**     | <code>string \| null</code>                          |
+| **`country`**      | <code>string \| null</code>                          |
 
 
 #### ImagePayload
@@ -203,10 +203,10 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### GetContactOptions
 
-| Prop             | Type                                              |
-| ---------------- | ------------------------------------------------- |
-| **`contactId`**  | <code>string</code>                               |
-| **`projection`** | <code><a href="#projection">Projection</a></code> |
+| Prop             | Type                                   |
+| ---------------- | -------------------------------------- |
+| **`contactId`**  | <code>string</code>                    |
+| **`projection`** | <code>[Projection](#projection)</code> |
 
 
 #### Projection
@@ -233,9 +233,9 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### GetContactsOptions
 
-| Prop             | Type                                              |
-| ---------------- | ------------------------------------------------- |
-| **`projection`** | <code><a href="#projection">Projection</a></code> |
+| Prop             | Type                                   |
+| ---------------- | -------------------------------------- |
+| **`projection`** | <code>[Projection](#projection)</code> |
 
 
 #### CreateContactResult
@@ -247,23 +247,23 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### CreateContactOptions
 
-| Prop          | Type                                                  |
-| ------------- | ----------------------------------------------------- |
-| **`contact`** | <code><a href="#contactinput">ContactInput</a></code> |
+| Prop          | Type                                       |
+| ------------- | ------------------------------------------ |
+| **`contact`** | <code>[ContactInput](#contactinput)</code> |
 
 
 #### ContactInput
 
-| Prop                  | Type                                                            | Description                          |
-| --------------------- | --------------------------------------------------------------- | ------------------------------------ |
-| **`name`**            | <code><a href="#nameinput">NameInput</a></code>                 | Object holding the name data         |
-| **`organization`**    | <code><a href="#organizationinput">OrganizationInput</a></code> | Object holding the organization data |
-| **`birthday`**        | <code><a href="#birthdayinput">BirthdayInput</a> \| null</code> | Birthday                             |
-| **`note`**            | <code>string \| null</code>                                     | Note                                 |
-| **`phones`**          | <code>PhoneInput[]</code>                                       | Phones                               |
-| **`emails`**          | <code>EmailInput[]</code>                                       | Emails                               |
-| **`urls`**            | <code>string[]</code>                                           | URLs                                 |
-| **`postalAddresses`** | <code>PostalAddressInput[]</code>                               | Postal Addresses                     |
+| Prop                  | Type                                                 | Description                          |
+| --------------------- | ---------------------------------------------------- | ------------------------------------ |
+| **`name`**            | <code>[NameInput](#nameinput)</code>                 | Object holding the name data         |
+| **`organization`**    | <code>[OrganizationInput](#organizationinput)</code> | Object holding the organization data |
+| **`birthday`**        | <code>[BirthdayInput](#birthdayinput) \| null</code> | Birthday                             |
+| **`note`**            | <code>string \| null</code>                          | Note                                 |
+| **`phones`**          | <code>PhoneInput[]</code>                            | Phones                               |
+| **`emails`**          | <code>EmailInput[]</code>                            | Emails                               |
+| **`urls`**            | <code>string[]</code>                                | URLs                                 |
+| **`postalAddresses`** | <code>PostalAddressInput[]</code>                    | Postal Addresses                     |
 
 
 #### NameInput
@@ -297,37 +297,37 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### PhoneInput
 
-| Prop            | Type                                            |
-| --------------- | ----------------------------------------------- |
-| **`type`**      | <code><a href="#phonetype">PhoneType</a></code> |
-| **`label`**     | <code>string \| null</code>                     |
-| **`isPrimary`** | <code>boolean</code>                            |
-| **`number`**    | <code>string \| null</code>                     |
+| Prop            | Type                                 |
+| --------------- | ------------------------------------ |
+| **`type`**      | <code>[PhoneType](#phonetype)</code> |
+| **`label`**     | <code>string \| null</code>          |
+| **`isPrimary`** | <code>boolean</code>                 |
+| **`number`**    | <code>string \| null</code>          |
 
 
 #### EmailInput
 
-| Prop            | Type                                            |
-| --------------- | ----------------------------------------------- |
-| **`type`**      | <code><a href="#emailtype">EmailType</a></code> |
-| **`label`**     | <code>string \| null</code>                     |
-| **`isPrimary`** | <code>boolean</code>                            |
-| **`address`**   | <code>string \| null</code>                     |
+| Prop            | Type                                 |
+| --------------- | ------------------------------------ |
+| **`type`**      | <code>[EmailType](#emailtype)</code> |
+| **`label`**     | <code>string \| null</code>          |
+| **`isPrimary`** | <code>boolean</code>                 |
+| **`address`**   | <code>string \| null</code>          |
 
 
 #### PostalAddressInput
 
-| Prop               | Type                                                            |
-| ------------------ | --------------------------------------------------------------- |
-| **`type`**         | <code><a href="#postaladdresstype">PostalAddressType</a></code> |
-| **`label`**        | <code>string \| null</code>                                     |
-| **`isPrimary`**    | <code>boolean</code>                                            |
-| **`street`**       | <code>string \| null</code>                                     |
-| **`neighborhood`** | <code>string \| null</code>                                     |
-| **`city`**         | <code>string \| null</code>                                     |
-| **`region`**       | <code>string \| null</code>                                     |
-| **`postcode`**     | <code>string \| null</code>                                     |
-| **`country`**      | <code>string \| null</code>                                     |
+| Prop               | Type                                                 |
+| ------------------ | ---------------------------------------------------- |
+| **`type`**         | <code>[PostalAddressType](#postaladdresstype)</code> |
+| **`label`**        | <code>string \| null</code>                          |
+| **`isPrimary`**    | <code>boolean</code>                                 |
+| **`street`**       | <code>string \| null</code>                          |
+| **`neighborhood`** | <code>string \| null</code>                          |
+| **`city`**         | <code>string \| null</code>                          |
+| **`region`**       | <code>string \| null</code>                          |
+| **`postcode`**     | <code>string \| null</code>                          |
+| **`country`**      | <code>string \| null</code>                          |
 
 
 #### DeleteContactOptions
@@ -339,9 +339,9 @@ pickContact(options: PickContactOptions) => Promise<void>
 
 #### PickContactOptions
 
-| Prop             | Type                                              |
-| ---------------- | ------------------------------------------------- |
-| **`projection`** | <code><a href="#projection">Projection</a></code> |
+| Prop             | Type                                   |
+| ---------------- | -------------------------------------- |
+| **`projection`** | <code>[Projection](#projection)</code> |
 
 
 ### Type Aliases
