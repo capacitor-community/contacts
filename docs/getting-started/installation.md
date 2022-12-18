@@ -51,6 +51,6 @@ Read about [Setting Permissions](https://capacitorjs.com/docs/android/configurat
 
 After you've followed all the installation steps, you can begin implementing this plugin in your code.
 
-- Read the Guides to learn more about specific methods. Such as [retrieving contacts](guide/retrieving-contacts.md) or [creating contacts](guide/creating-contacts.md)
+- Read the Guides to learn more about specific methods. Such as [retrieving contacts](guide/retrieving-contacts.md?id=retrieving-contacts) or [creating contacts](guide/creating-contacts.md?id=creating-contacts)
 - Refer to the [API Reference](api.md#api-reference-🔌) to see all available methods the plugin offers.
 <!-- - Take a look at some examples [here](https://github.com/capacitor-community/contacts-examples). -->

@@ -53,14 +53,14 @@ It's highly recommended to upgrade to either v3 or v4 if you are using an old ve
 
 ## Documentation
 
-Extensive documentation is available [here](https://capacitor-community.github.io/capacitor-contacts/).
+Extensive documentation is available [here](https://capacitor-community.github.io/contacts/).
 
 ## Shortcuts
 
-- [Documentation homepage](https://capacitor-community.github.io/capacitor-contacts/)
+- [Documentation homepage](https://capacitor-community.github.io/contacts/)
 
-- [Installation](https://capacitor-community.github.io/capacitor-contacts/#/getting-started/installation)
+- [Installation](https://capacitor-community.github.io/contacts/#/getting-started/installation)
 
-- [API reference](https://capacitor-community.github.io/capacitor-contacts/#/api)
+- [API reference](https://capacitor-community.github.io/contacts/#/api)
 
 <!-- - [Examples](https://github.com/capacitor-community/contacts-examples) -->
