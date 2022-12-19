@@ -9,7 +9,7 @@ npm install @capacitor-community/contacts@^3.0.0-beta
 npx cap sync
 ```
 
-## For projects using Capacitor v3
+## For projects using Capacitor v4
 
 ```bash
 npm install @capacitor-community/contacts@^4.0.0-beta
