@@ -140,7 +140,7 @@ public class ContactPayload {
                             // Birthday is formatted like "mm-dd"
                             birthday.put("month", parseStrToIntSafe(splittedBirthdayString[0]));
                             birthday.put("day", parseStrToIntSafe(splittedBirthdayString[1]));
-                        } else {
+                        } else if (splittedBirthdayString.length == 3) {
                             // Birthday is formatted like "yyyy-mm-dd"
                             birthday.put("year", parseStrToIntSafe(splittedBirthdayString[0]));
                             birthday.put("month", parseStrToIntSafe(splittedBirthdayString[1]));
