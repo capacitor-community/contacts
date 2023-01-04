@@ -35,7 +35,7 @@ It would thus only return two properties: `contactId` and `name`.
 
 This is done to keep the performance at its best. Because always retrieving all possible fields, would quickly take up a lot of ram when a large number of contacts is present in the device's phonebook.
 
-All fields available for `projection` can be found in the [API reference](/#/api?id=projection).
+All fields available for `projection` can be found in the [API reference](api.md#projection).
 
 !> To be able to request the notes in contract entries in **iOS 13 or later**, your app must have the `com.apple.developer.contacts.notes` entitlement. You can read more about this in the [official Apple documentation](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_contacts_notes).
 

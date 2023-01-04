@@ -1,6 +1,6 @@
 # Quick start
 
-Before you continue, make sure you have followed all the steps from the [Installation section](installation).
+Before you continue, make sure you have followed all the steps from the [Installation section](getting-started-installation.md).
 
 ## Print some data to the console for a list of contacts
 

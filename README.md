@@ -59,7 +59,7 @@ Extensive documentation is available [here](https://capacitor-community.github.i
 
 - [Documentation homepage](https://capacitor-community.github.io/contacts/)
 
-- [Installation](https://capacitor-community.github.io/contacts/#/getting-started/installation)
+- [Installation](https://capacitor-community.github.io/contacts/#/getting-started-installation)
 
 - [API reference](https://capacitor-community.github.io/contacts/#/api)
 
