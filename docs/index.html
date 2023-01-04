@@ -13,6 +13,14 @@
       rel="stylesheet"
       href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css"
     />
+    <style>
+      .hide-next-element {
+        display: none;
+      }
+      .hide-next-element + * {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
@@ -20,6 +28,8 @@
       window.$docsify = {
         name: 'Capacitor Plugin for accessing Contacts',
         repo: 'https://github.com/capacitor-community/contacts',
+        homepage:
+          'https://raw.githubusercontent.com/capacitor-community/contacts/v3/README.md',
         auto2top: true,
         coverpage: 'coverpage.md',
         loadSidebar: true,

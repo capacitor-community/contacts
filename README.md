@@ -51,11 +51,19 @@ Admittedly, this wasn't the most consistent versioning strategy, and we'll keep 
 
 It's highly recommended to upgrade to either v3 or v4 if you are using an old version!
 
+<p class="hide-next-element"></p>
+
 ## Documentation
+
+<p class="hide-next-element"></p>
 
 Extensive documentation is available [here](https://capacitor-community.github.io/contacts/).
 
+<p class="hide-next-element"></p>
+
 ## Shortcuts
+
+<p class="hide-next-element"></p>
 
 - [Documentation homepage](https://capacitor-community.github.io/contacts/)
 
@@ -64,3 +72,7 @@ Extensive documentation is available [here](https://capacitor-community.github.i
 - [API reference](https://capacitor-community.github.io/contacts/#/api)
 
 <!-- - [Examples](https://github.com/capacitor-community/contacts-examples) -->
+
+## Limitations
+
+This plugins only adds support for using the native iOS and Android APIs. If you want to make use of the JavaScript API as well (for a possible webapp) you should implement that separately. Of course it should be possible to integrate this into the plugin in the future. If you want to help out with this, please start a PR.
