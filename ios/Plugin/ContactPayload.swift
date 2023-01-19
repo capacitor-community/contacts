@@ -152,8 +152,8 @@ public class ContactPayload {
 
         // Image
         if contact.isKeyAvailable(CNContactImageDataKey) {
-            if let thumbnailImage = contact.thumbnailImageData {
-                self.image["base64String"] = "data:image/png;base64,\(thumbnailImage.base64EncodedString())"
+            if let image = contact.imageData {
+                self.image["base64String"] = "data:image/png;base64,\(image.base64EncodedString())"
             }
         }
     }
