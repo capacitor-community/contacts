@@ -15,6 +15,10 @@ import android.util.Base64;
 import androidx.annotation.NonNull;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.URLConnection;
 
 public class ContactPayload {
 
@@ -50,6 +54,19 @@ public class ContactPayload {
 
     ContactPayload(String contactId) {
         this.contactId = contactId;
+    }
+
+    private static @NonNull String getMimetype(byte[] blob) {
+        try {
+            InputStream is = new BufferedInputStream(new ByteArrayInputStream(blob));
+            String mimeType = URLConnection.guessContentTypeFromStream(is);
+            if (mimeType == null) {
+                return "image/png";
+            }
+            return mimeType;
+        } catch (Exception e) {
+            return "image/png";
+        }
     }
 
     private Integer parseStrToIntSafe(String str) {
@@ -90,8 +107,9 @@ public class ContactPayload {
         if (index >= 0) {
             byte[] blob = cursor.getBlob(index);
             if (blob != null) {
+                String mimeType = getMimetype(blob);
                 String encodedImage = Base64.encodeToString(blob, Base64.NO_WRAP);
-                return "data:image/png;base64," + encodedImage;
+                return "data:" + mimeType + ";base64," + encodedImage;
             }
         }
         return null;

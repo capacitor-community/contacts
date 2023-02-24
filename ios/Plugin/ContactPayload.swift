@@ -38,6 +38,17 @@ public class ContactPayload {
         self.contactId = contactId
     }
 
+    static func getMimetype(_ data: Data) -> String {
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        default:
+            return "image/png"
+        }
+    }
+
     static func getLabel(_ type: String?, _ rawType: String?) -> String? {
         // On Android, a custom label is saved with `type` set to "custom" and a separate `label` attribute.
         // On iOS, on the contrary, the custom value is just saved into the `type` attribute.
@@ -153,7 +164,7 @@ public class ContactPayload {
         // Image
         if contact.isKeyAvailable(CNContactImageDataKey) {
             if let image = contact.imageData {
-                self.image["base64String"] = "data:image/png;base64,\(image.base64EncodedString())"
+                self.image["base64String"] = "data:\(ContactPayload.getMimetype(image));base64,\(image.base64EncodedString())"
             }
         }
     }
