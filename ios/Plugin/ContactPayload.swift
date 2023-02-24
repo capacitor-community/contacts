@@ -127,7 +127,7 @@ public class ContactPayload {
 
         // Postal Addresses
         if contact.isKeyAvailable(CNContactPostalAddressesKey) {
-            self.urls = contact.postalAddresses.map { postalAddress in
+            self.postalAddresses = contact.postalAddresses.map { postalAddress in
                 let type = Contacts.postalAddressTypeMap.getKey(postalAddress.label)
                 let formatted = CNPostalAddressFormatter.string(from: postalAddress.value, style: .mailingAddress)
 
