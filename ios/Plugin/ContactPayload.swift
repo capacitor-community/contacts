@@ -164,7 +164,9 @@ public class ContactPayload {
         // Image
         if contact.isKeyAvailable(CNContactImageDataKey) {
             if let image = contact.imageData {
-                self.image["base64String"] = "data:\(ContactPayload.getMimetype(image));base64,\(image.base64EncodedString())"
+                let mimeType = ContactPayload.getMimetype(image)
+                let encodedImage = image.base64EncodedString()
+                self.image["base64String"] = "data:\(mimeType);base64,\(encodedImage)"
             }
         }
     }
