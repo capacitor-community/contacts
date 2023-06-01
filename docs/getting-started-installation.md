@@ -2,10 +2,10 @@
 
 ## Install package from npm
 
-## For projects using Capacitor v3
+## For projects using Capacitor v5
 
 ```bash
-npm install @capacitor-community/contacts@^3.0.0
+npm install @capacitor-community/contacts@^5.0.0
 npx cap sync
 ```
 
@@ -15,6 +15,13 @@ npx cap sync
 npm install @capacitor-community/contacts@^4.0.0
 npx cap sync
 
+```
+
+## For projects using Capacitor v3
+
+```bash
+npm install @capacitor-community/contacts@^3.0.0
+npx cap sync
 ```
 
 More info about previous versions of this plugin can be found in the [README](https://github.com/capacitor-community/contacts/blob/main/README.md#versions)
