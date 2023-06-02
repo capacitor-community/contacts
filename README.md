@@ -9,7 +9,7 @@
 <p align="center">Capacitor Plugin for accessing Contacts.</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3%20and%20v4-blue?logo=Capacitor&style=flat-square" />
+  <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3,%20v4%20and%20v5-blue?logo=Capacitor&style=flat-square" />
   <img src="https://img.shields.io/maintenance/yes/2023?style=flat-square" />
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts">
     <img src="https://img.shields.io/npm/l/@capacitor-community/contacts?style=flat-square" />
@@ -33,6 +33,7 @@ Currently there are two actively maintained versions of this plugin. The API of 
 
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
+| v5.x   | v5.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v4.x   | v4.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v3.x   | v3.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 
@@ -49,7 +50,7 @@ In the past a few other versions of this plugin were released, also targeting di
 
 Admittedly, this wasn't the most consistent versioning strategy, and we'll keep it more coherent in the future.
 
-It's highly recommended to upgrade to either v3 or v4 if you are using an old version!
+It's highly recommended to upgrade to either v3, v4 or v5 if you are using an old version!
 
 <p class="hide-next-element"></p>
 
