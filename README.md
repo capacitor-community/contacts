@@ -29,7 +29,7 @@ This plugin enables you to access the native contacts APIs of iOS and Android. I
 
 ## Versions
 
-Currently there are two actively maintained versions of this plugin. The API of these versions is identical. The only difference between the two versions is the supported Capacitor versions.
+Currently there are three actively maintained versions of this plugin. The API of these versions is identical. The only difference between these versions is the supported Capacitor versions.
 
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
