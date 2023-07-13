@@ -86,12 +86,14 @@ deleteContact(options: DeleteContactOptions) => Promise<void>
 ### pickContact(...)
 
 ```typescript
-pickContact(options: PickContactOptions) => Promise<void>
+pickContact(options: PickContactOptions) => Promise<PickContactResult>
 ```
 
 | Param         | Type                                                   |
 | ------------- | ------------------------------------------------------ |
 | **`options`** | <code>[PickContactOptions](#pickcontactoptions)</code> |
+
+**Returns:** <code>Promise&lt;[PickContactResult](#pickcontactresult)&gt;</code>
 
 --------------------
 
@@ -335,6 +337,13 @@ pickContact(options: PickContactOptions) => Promise<void>
 | Prop            | Type                |
 | --------------- | ------------------- |
 | **`contactId`** | <code>string</code> |
+
+
+#### PickContactResult
+
+| Prop          | Type                                           |
+| ------------- | ---------------------------------------------- |
+| **`contact`** | <code>[ContactPayload](#contactpayload)</code> |
 
 
 #### PickContactOptions
