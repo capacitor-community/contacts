@@ -11,7 +11,7 @@ export interface ContactsPlugin {
   getContacts(options: GetContactsOptions): Promise<GetContactsResult>;
   createContact(options: CreateContactOptions): Promise<CreateContactResult>;
   deleteContact(options: DeleteContactOptions): Promise<void>;
-  pickContact(options: PickContactOptions): Promise<void>;
+  pickContact(options: PickContactOptions): Promise<PickContactResult>;
 }
 
 export enum PhoneType {
@@ -341,4 +341,8 @@ export interface DeleteContactOptions {
 
 export interface PickContactOptions {
   projection: Projection;
+}
+
+export interface PickContactResult {
+  contact: ContactPayload;
 }
