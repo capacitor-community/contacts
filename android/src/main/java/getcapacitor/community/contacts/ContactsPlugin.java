@@ -18,6 +18,8 @@ import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @CapacitorPlugin(
     name = "Contacts",
@@ -102,20 +104,34 @@ public class ContactsPlugin extends Plugin {
         if (!isContactsPermissionGranted()) {
             requestContactsPermission(call);
         } else {
-            HashMap<String, ContactPayload> contacts = implementation.getContacts(
-                new GetContactsProjectionInput(call.getObject("projection"))
-            );
+            ExecutorService executor = Executors.newSingleThreadExecutor();
 
-            JSArray contactsJSArray = new JSArray();
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    HashMap<String, ContactPayload> contacts = implementation.getContacts(
+                        new GetContactsProjectionInput(call.getObject("projection"))
+                    );
 
-            for (Map.Entry<String, ContactPayload> entry : contacts.entrySet()) {
-                ContactPayload value = entry.getValue();
-                contactsJSArray.put(value.getJSObject());
-            }
+                    JSArray contactsJSArray = new JSArray();
+                    for (Map.Entry<String, ContactPayload> entry : contacts.entrySet()) {
+                        ContactPayload value = entry.getValue();
+                        contactsJSArray.put(value.getJSObject());
+                    }
 
-            JSObject result = new JSObject();
-            result.put("contacts", contactsJSArray);
-            call.resolve(result);
+                    JSObject result = new JSObject();
+                    result.put("contacts", contactsJSArray);
+
+                    bridge.getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            call.resolve(result);
+                        }
+                    });
+                }
+            });
+
+            executor.shutdown();
         }
     }
 
