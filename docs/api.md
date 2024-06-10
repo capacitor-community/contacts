@@ -133,14 +133,15 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 
 #### NamePayload
 
-| Prop          | Type                        |
-| ------------- | --------------------------- |
-| **`display`** | <code>string \| null</code> |
-| **`given`**   | <code>string \| null</code> |
-| **`middle`**  | <code>string \| null</code> |
-| **`family`**  | <code>string \| null</code> |
-| **`prefix`**  | <code>string \| null</code> |
-| **`suffix`**  | <code>string \| null</code> |
+| Prop            | Type                        |
+| --------------- | --------------------------- |
+| **`display`**   | <code>string \| null</code> |
+| **`given`**     | <code>string \| null</code> |
+| **`middle`**    | <code>string \| null</code> |
+| **`family`**    | <code>string \| null</code> |
+| **`prefix`**    | <code>string \| null</code> |
+| **`suffix`**    | <code>string \| null</code> |
+| **`nickname`**  | <code>string \| null</code> |
 
 
 #### OrganizationPayload
@@ -270,13 +271,14 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 
 #### NameInput
 
-| Prop         | Type                        |
-| ------------ | --------------------------- |
-| **`given`**  | <code>string \| null</code> |
-| **`middle`** | <code>string \| null</code> |
-| **`family`** | <code>string \| null</code> |
-| **`prefix`** | <code>string \| null</code> |
-| **`suffix`** | <code>string \| null</code> |
+| Prop           | Type                        |
+| -------------- | --------------------------- |
+| **`given`**    | <code>string \| null</code> |
+| **`middle`**   | <code>string \| null</code> |
+| **`family`**   | <code>string \| null</code> |
+| **`prefix`**   | <code>string \| null</code> |
+| **`suffix`**   | <code>string \| null</code> |
+| **`nickname`** | <code>string \| null</code> |
 
 
 #### OrganizationInput
