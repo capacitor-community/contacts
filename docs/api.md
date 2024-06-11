@@ -141,7 +141,7 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 | **`family`**    | <code>string \| null</code> |
 | **`prefix`**    | <code>string \| null</code> |
 | **`suffix`**    | <code>string \| null</code> |
-| **`nickname`**  | <code>string \| null</code> |
+| **`nick`**      | <code>string \| null</code> |
 
 
 #### OrganizationPayload
@@ -278,7 +278,7 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 | **`family`**   | <code>string \| null</code> |
 | **`prefix`**   | <code>string \| null</code> |
 | **`suffix`**   | <code>string \| null</code> |
-| **`nickname`** | <code>string \| null</code> |
+| **`nick`**     | <code>string \| null</code> |
 
 
 #### OrganizationInput

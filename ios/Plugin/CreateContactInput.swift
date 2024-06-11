@@ -9,7 +9,7 @@ public class CreateContactInput {
     public var nameFamily: String?
     public var namePrefix: String?
     public var nameSuffix: String?
-    public var nameNickname: String?
+    public var nameNick: String?
 
     // Organization
     public var organizationName: String?
@@ -45,7 +45,7 @@ public class CreateContactInput {
             self.nameFamily = nameObject["family"] as? String
             self.namePrefix = nameObject["prefix"] as? String
             self.nameSuffix = nameObject["suffix"] as? String
-            self.nameNickname = nameObject["nickname"] as? String
+            self.nameNick = nameObject["nick"] as? String
         }
 
         // Organization

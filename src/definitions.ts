@@ -134,7 +134,7 @@ export interface NamePayload {
   family: string | null;
   prefix: string | null;
   suffix: string | null;
-  nickname: string | null;
+  nick: string | null;
 }
 
 export interface OrganizationPayload {
@@ -241,7 +241,7 @@ export interface NameInput {
   family?: string | null;
   prefix?: string | null;
   suffix?: string | null;
-  nickname?: string | null;
+  nick?: string | null;
 }
 
 export interface OrganizationInput {
