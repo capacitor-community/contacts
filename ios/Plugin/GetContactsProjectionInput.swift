@@ -30,6 +30,9 @@ public class GetContactsProjectionInput {
     // Image
     private var image: Bool?
 
+    // Thumbnail Image
+    private var thumbnailImage: Bool?
+
     init(_ fromJSONObject: JSObject) {
         // Name
         self.name = fromJSONObject["name"] as? Bool
@@ -57,6 +60,9 @@ public class GetContactsProjectionInput {
 
         // Image
         self.image = fromJSONObject["image"] as? Bool
+
+        // Thumbnail Image
+        self.thumbnailImage = fromJSONObject["thumbnailImage"] as? Bool
     }
 
     public func getProjection() -> [CNKeyDescriptor] {
@@ -112,6 +118,11 @@ public class GetContactsProjectionInput {
         // Image
         if self.image == true {
             projection.append(CNContactImageDataKey as CNKeyDescriptor)
+        }
+
+        // Thumbnail Image
+        if self.thumbnailImage == true {
+            projection.append(CNContactThumbnailImageDataKey as CNKeyDescriptor)
         }
 
         return projection

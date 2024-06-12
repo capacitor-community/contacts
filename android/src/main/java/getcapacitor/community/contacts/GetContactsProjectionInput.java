@@ -33,7 +33,10 @@ public class GetContactsProjectionInput {
     private final boolean postalAddresses;
 
     // Image
-    private final boolean image;
+    final boolean image;
+
+    // Thumbnail Image
+    private final boolean thumbnailImage;
 
     GetContactsProjectionInput(JSONObject fromJSONObject) {
         // Name
@@ -62,6 +65,9 @@ public class GetContactsProjectionInput {
 
         // Image
         this.image = fromJSONObject.optBoolean("image");
+
+        // Thumbnail Image
+        this.thumbnailImage = fromJSONObject.optBoolean("thumbnailImage");
     }
 
     public String[] getProjection() {
@@ -140,6 +146,11 @@ public class GetContactsProjectionInput {
             projection.add(ContactsContract.Contacts.Photo.PHOTO);
         }
 
+        // Thumbnail Image
+        if (this.thumbnailImage) {
+            projection.add(ContactsContract.Contacts.Photo.PHOTO);
+        }
+
         return projection.toArray(new String[projection.size()]);
     }
 
@@ -188,6 +199,11 @@ public class GetContactsProjectionInput {
 
         // Image
         if (this.image) {
+            selectionArgs.add(ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE);
+        }
+
+        // Thumbnail Image
+        if (this.thumbnailImage) {
             selectionArgs.add(ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE);
         }
 

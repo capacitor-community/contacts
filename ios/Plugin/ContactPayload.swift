@@ -34,6 +34,9 @@ public class ContactPayload {
     // Image
     private var image: JSObject = JSObject()
 
+    // Thumbnail Image
+    private var thumbnailImage: JSObject = JSObject()
+
     init(_ contactId: String) {
         self.contactId = contactId
     }
@@ -169,6 +172,15 @@ public class ContactPayload {
                 self.image["base64String"] = "data:\(mimeType);base64,\(encodedImage)"
             }
         }
+
+        // Thumbnail Image
+        if contact.isKeyAvailable(CNContactThumbnailImageDataKey) {
+            if let thumbnailImage = contact.thumbnailImageData {
+                let mimeType = ContactPayload.getMimetype(thumbnailImage)
+                let encodedImage = thumbnailImage.base64EncodedString()
+                self.thumbnailImage["base64String"] = "data:\(mimeType);base64,\(encodedImage)"
+            }
+        }
     }
 
     public func getJSObject() -> JSObject {
@@ -220,6 +232,11 @@ public class ContactPayload {
         // Image
         if self.image.count > 0 {
             contact["image"] = self.image
+        }
+
+        // Thumbnail Image
+        if self.thumbnailImage.count > 0 {
+            contact["thumbnailImage"] = self.thumbnailImage
         }
 
         return contact

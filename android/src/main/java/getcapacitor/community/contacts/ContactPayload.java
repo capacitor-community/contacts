@@ -1,6 +1,13 @@
 package getcapacitor.community.contacts;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Event;
@@ -11,14 +18,21 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
+import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.Objects;
 
 public class ContactPayload {
 
@@ -115,7 +129,8 @@ public class ContactPayload {
         return null;
     }
 
-    public void fillDataByCursor(@NonNull Cursor cursor) {
+    public void fillDataByCursor(ContentResolver cr, @NonNull Cursor cursor, GetContactsProjectionInput projectionInput)
+        throws IOException {
         String mimeType = getStringByColumnName(cursor, ContactsContract.Data.MIMETYPE);
 
         if (mimeType == null) {
@@ -222,10 +237,68 @@ public class ContactPayload {
                 break;
             // Image
             case Photo.CONTENT_ITEM_TYPE:
-                String base64String = getBase64ByColumnName(cursor, Photo.PHOTO);
-                if (base64String != null) {
-                    image.put("base64String", base64String);
+                if (projectionInput.image) {
+                    String base64String = getBase64ByColumnName(cursor, Photo.PHOTO);
+                    if (base64String != null) {
+                        image.put("base64String", base64String);
+                    }
                 }
+
+                if (projectionInput.image) {
+                    long contactIdLong = Long.parseLong(contactId);
+
+                    Uri contact = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactIdLong);
+
+//                    // Option 1:
+//                    Uri imageUrl = Uri.withAppendedPath(contact, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+//                    Bitmap bitmap;
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//                        bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(cr, imageUrl));
+//                    } else {
+//                        bitmap = MediaStore.Images.Media.getBitmap(cr, imageUrl);
+//                    }
+//
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                    byte[] b = baos.toByteArray();
+//                    String base64String = "data:" + "image/png" + ";base64," + Base64.encodeToString(b, Base64.NO_WRAP);
+
+//                    // Option 2:
+//                    InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(cr, contact, true);
+//                    inputStream.reset();
+//                    byte[] blob = new byte[inputStream.available()];
+//                    DataInputStream dataInputStream = new DataInputStream(inputStream);
+//                    dataInputStream.readFully(blob);
+//
+//                    String blobMimeType = getMimetype(blob);
+//                    String encodedImage = Base64.encodeToString(blob, Base64.NO_WRAP);
+//                    String base64String = "data:" + blobMimeType + ";base64," + encodedImage;
+
+                    // Option 3:
+                    InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(cr, contact, true);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+
+                    if (bitmap != null) {
+                        Bitmap.CompressFormat compressFormat;
+                        String streamMimeType;
+
+                        if (Objects.equals(options.outMimeType, "image/png")) {
+                            compressFormat = Bitmap.CompressFormat.PNG;
+                            streamMimeType = "image/png";
+                        } else {
+                            compressFormat = Bitmap.CompressFormat.JPEG;
+                            streamMimeType = "image/jpeg";
+                        }
+
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(compressFormat, 100, baos);
+                        byte[] blob = baos.toByteArray();
+                        String encodedImage = Base64.encodeToString(blob, Base64.NO_WRAP);
+                        String base64String = "data:" + streamMimeType + ";base64," + encodedImage;
+                    }
+                }
+
                 break;
         }
     }

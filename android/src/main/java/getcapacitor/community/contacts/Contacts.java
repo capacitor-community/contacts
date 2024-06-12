@@ -18,6 +18,8 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.RawContacts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -104,7 +106,7 @@ public class Contacts {
         this.mActivity = activity;
     }
 
-    public ContactPayload getContact(@NonNull String contactId, GetContactsProjectionInput projectionInput) {
+    public ContactPayload getContact(@NonNull String contactId, GetContactsProjectionInput projectionInput) throws IOException {
         String[] projection = projectionInput.getProjection();
 
         String selection = ContactsContract.RawContacts.CONTACT_ID + " = ?";
@@ -117,7 +119,7 @@ public class Contacts {
             ContactPayload contact = new ContactPayload(contactId);
 
             while (cursor.moveToNext()) {
-                contact.fillDataByCursor(cursor);
+                contact.fillDataByCursor(cr, cursor, projectionInput);
             }
             cursor.close();
 
@@ -131,7 +133,7 @@ public class Contacts {
         return null;
     }
 
-    public HashMap<String, ContactPayload> getContacts(GetContactsProjectionInput projectionInput) {
+    public HashMap<String, ContactPayload> getContacts(GetContactsProjectionInput projectionInput) throws IOException {
         String[] projection = projectionInput.getProjection();
 
         // String[] selectionArgs = projectionInput.getSelectionArgs();
@@ -159,7 +161,7 @@ public class Contacts {
                 }
 
                 if (contact != null) {
-                    contact.fillDataByCursor(cursor);
+                    contact.fillDataByCursor(cr, cursor, projectionInput);
                 }
             }
         }
