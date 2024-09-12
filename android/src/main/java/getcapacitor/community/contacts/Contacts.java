@@ -16,6 +16,8 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.RawContacts;
+import android.util.Base64;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
@@ -310,6 +312,21 @@ public class Contacts {
             if (address.isPrimary) {
                 op.withValue(StructuredPostal.IS_PRIMARY, true);
             }
+            ops.add(op.build());
+        }
+
+        // Image
+        if (contactInput.image != null && contactInput.image.base64String != null) {
+            byte[] photoData = Base64.decode(contactInput.image.base64String, Base64.DEFAULT);
+
+            op =
+                ContentProviderOperation
+                    .newInsert(ContactsContract.Data.CONTENT_URI)
+                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    // Add to this key
+                    .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+                    // Data
+                    .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, photoData);
             ops.add(op.build());
         }
 

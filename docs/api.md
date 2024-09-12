@@ -266,6 +266,7 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 | **`emails`**          | <code>EmailInput[]</code>                            | Emails                               |
 | **`urls`**            | <code>string[]</code>                                | URLs                                 |
 | **`postalAddresses`** | <code>PostalAddressInput[]</code>                    | Postal Addresses                     |
+| **`image`**           | <code>[ImageInput](#imageinput) \| null</code>       | Image                                |
 
 
 #### NameInput
@@ -330,6 +331,13 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 | **`region`**       | <code>string \| null</code>                          |
 | **`postcode`**     | <code>string \| null</code>                          |
 | **`country`**      | <code>string \| null</code>                          |
+
+
+#### ImageInput
+
+| Prop               | Type                        | Description           |
+| ------------------ | --------------------------- | --------------------- |
+| **`base64String`** | <code>string \| null</code> | Base64 encoded image. |
 
 
 #### DeleteContactOptions
