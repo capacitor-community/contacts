@@ -33,8 +33,8 @@ public class CreateContactInput {
     // Postal Addresses
     public var postalAddresses: [PostalAddressInput] = []
 
-    // @TODO:
     // Image
+    public var image: ImageInput?
 
     init(_ fromJSONObject: JSObject) {
         // Name
@@ -103,6 +103,11 @@ public class CreateContactInput {
                 }
             }
         }
+
+        // Image
+        if let imageObject = fromJSONObject["image"] as? JSObject {
+            self.image = ImageInput.init(imageObject)
+        }
     }
 
     static func getType(_ type: String?, _ fromJSONObject: JSObject) -> String? {
@@ -168,6 +173,15 @@ public class CreateContactInput {
             self.region = fromJSONObject["region"] as? String
             self.postcode = fromJSONObject["postcode"] as? String
             self.country = fromJSONObject["country"] as? String
+        }
+    }
+
+    public class ImageInput {
+
+        public var base64String: String?
+
+        init(_ fromJSONObject: JSObject) {
+            self.base64String = fromJSONObject["base64String"] as? String
         }
     }
 }

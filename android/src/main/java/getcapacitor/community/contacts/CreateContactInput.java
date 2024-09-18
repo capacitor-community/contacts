@@ -45,8 +45,8 @@ public class CreateContactInput {
     // Postal Addresses
     public ArrayList<PostalAddressInput> postalAddresses = new ArrayList<>();
 
-    // @TODO:
     // Image
+    public ImageInput image;
 
     CreateContactInput(JSONObject fromJSONObject) {
         // Name
@@ -153,6 +153,12 @@ public class CreateContactInput {
                 }
             }
         }
+
+        // Image
+        JSONObject imageObject = fromJSONObject.optJSONObject("image");
+        if (imageObject != null) {
+            this.image = new ImageInput(imageObject);
+        }
     }
 
     public static class PhoneInput {
@@ -213,6 +219,15 @@ public class CreateContactInput {
             this.region = fromJSONObject.has("region") ? fromJSONObject.optString("region") : null;
             this.postcode = fromJSONObject.has("postcode") ? fromJSONObject.optString("postcode") : null;
             this.country = fromJSONObject.has("country") ? fromJSONObject.optString("country") : null;
+        }
+    }
+
+    public static class ImageInput {
+
+        public final String base64String;
+
+        ImageInput(JSONObject fromJSONObject) {
+            this.base64String = fromJSONObject.has("base64String") ? fromJSONObject.optString("base64String") : null;
         }
     }
 }

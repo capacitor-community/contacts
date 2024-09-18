@@ -182,6 +182,15 @@ public class Contacts: NSObject {
             )
         })
 
+        // Image
+        if let image = contactInput.image {
+            if let base64String = image.base64String {
+                if let data = Data(base64Encoded: base64String, options: .ignoreUnknownCharacters) {
+                    newContact.imageData = data
+                }
+            }
+        }
+
         do {
             let cs = CNContactStore()
             let saveRequest = CNSaveRequest()
