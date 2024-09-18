@@ -115,29 +115,33 @@ public class ContactsPlugin extends Plugin {
                     new Runnable() {
                         @Override
                         public void run() {
-                            HashMap<String, ContactPayload> contacts = implementation.getContacts(
-                                new GetContactsProjectionInput(call.getObject("projection"))
-                            );
-
-                            JSArray contactsJSArray = new JSArray();
-                            for (Map.Entry<String, ContactPayload> entry : contacts.entrySet()) {
-                                ContactPayload value = entry.getValue();
-                                contactsJSArray.put(value.getJSObject());
-                            }
-
-                            JSObject result = new JSObject();
-                            result.put("contacts", contactsJSArray);
-
-                            bridge
-                                .getActivity()
-                                .runOnUiThread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            call.resolve(result);
-                                        }
-                                    }
+                            try {
+                                HashMap<String, ContactPayload> contacts = implementation.getContacts(
+                                    new GetContactsProjectionInput(call.getObject("projection"))
                                 );
+
+                                JSArray contactsJSArray = new JSArray();
+                                for (Map.Entry<String, ContactPayload> entry : contacts.entrySet()) {
+                                    ContactPayload value = entry.getValue();
+                                    contactsJSArray.put(value.getJSObject());
+                                }
+
+                                JSObject result = new JSObject();
+                                result.put("contacts", contactsJSArray);
+
+                                bridge
+                                    .getActivity()
+                                    .runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                call.resolve(result);
+                                            }
+                                        }
+                                    );
+                            } catch (Exception exception) {
+                                rejectCall(call, exception);
+                            }
                         }
                     }
                 );
