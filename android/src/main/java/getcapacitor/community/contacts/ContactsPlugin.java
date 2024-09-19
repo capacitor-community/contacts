@@ -74,114 +74,144 @@ public class ContactsPlugin extends Plugin {
 
     @PluginMethod
     public void getContact(PluginCall call) {
-        if (!isContactsPermissionGranted()) {
-            requestContactsPermission(call);
-        } else {
-            String contactId = call.getString("contactId");
+        try {
+            if (!isContactsPermissionGranted()) {
+                requestContactsPermission(call);
+            } else {
+                String contactId = call.getString("contactId");
 
-            if (contactId == null) {
-                call.reject("Parameter `contactId` not provided.");
-                return;
+                if (contactId == null) {
+                    call.reject("Parameter `contactId` not provided.");
+                    return;
+                }
+
+                GetContactsProjectionInput projectionInput = new GetContactsProjectionInput(call.getObject("projection"));
+
+                ContactPayload contact = implementation.getContact(contactId, projectionInput);
+
+                if (contact == null) {
+                    call.reject("Contact not found.");
+                    return;
+                }
+
+                JSObject result = new JSObject();
+                result.put("contact", contact.getJSObject());
+                call.resolve(result);
             }
-
-            GetContactsProjectionInput projectionInput = new GetContactsProjectionInput(call.getObject("projection"));
-
-            ContactPayload contact = implementation.getContact(contactId, projectionInput);
-
-            if (contact == null) {
-                call.reject("Contact not found.");
-                return;
-            }
-
-            JSObject result = new JSObject();
-            result.put("contact", contact.getJSObject());
-            call.resolve(result);
+        } catch (Exception exception) {
+            rejectCall(call, exception);
         }
     }
 
     @PluginMethod
     public void getContacts(PluginCall call) {
-        if (!isContactsPermissionGranted()) {
-            requestContactsPermission(call);
-        } else {
-            ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            if (!isContactsPermissionGranted()) {
+                requestContactsPermission(call);
+            } else {
+                ExecutorService executor = Executors.newSingleThreadExecutor();
 
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    HashMap<String, ContactPayload> contacts = implementation.getContacts(
-                        new GetContactsProjectionInput(call.getObject("projection"))
-                    );
-
-                    JSArray contactsJSArray = new JSArray();
-                    for (Map.Entry<String, ContactPayload> entry : contacts.entrySet()) {
-                        ContactPayload value = entry.getValue();
-                        contactsJSArray.put(value.getJSObject());
-                    }
-
-                    JSObject result = new JSObject();
-                    result.put("contacts", contactsJSArray);
-
-                    bridge.getActivity().runOnUiThread(new Runnable() {
+                executor.execute(
+                    new Runnable() {
                         @Override
                         public void run() {
-                            call.resolve(result);
-                        }
-                    });
-                }
-            });
+                            try {
+                                HashMap<String, ContactPayload> contacts = implementation.getContacts(
+                                    new GetContactsProjectionInput(call.getObject("projection"))
+                                );
 
-            executor.shutdown();
+                                JSArray contactsJSArray = new JSArray();
+                                for (Map.Entry<String, ContactPayload> entry : contacts.entrySet()) {
+                                    ContactPayload value = entry.getValue();
+                                    contactsJSArray.put(value.getJSObject());
+                                }
+
+                                JSObject result = new JSObject();
+                                result.put("contacts", contactsJSArray);
+
+                                bridge
+                                    .getActivity()
+                                    .runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                call.resolve(result);
+                                            }
+                                        }
+                                    );
+                            } catch (Exception exception) {
+                                rejectCall(call, exception);
+                            }
+                        }
+                    }
+                );
+
+                executor.shutdown();
+            }
+        } catch (Exception exception) {
+            rejectCall(call, exception);
         }
     }
 
     @PluginMethod
     public void createContact(PluginCall call) {
-        if (!isContactsPermissionGranted()) {
-            requestContactsPermission(call);
-        } else {
-            String contactId = implementation.createContact(new CreateContactInput(call.getObject("contact")));
+        try {
+            if (!isContactsPermissionGranted()) {
+                requestContactsPermission(call);
+            } else {
+                String contactId = implementation.createContact(new CreateContactInput(call.getObject("contact")));
 
-            if (contactId == null) {
-                call.reject("Something went wrong.");
-                return;
+                if (contactId == null) {
+                    call.reject("Something went wrong.");
+                    return;
+                }
+
+                JSObject result = new JSObject();
+                result.put("contactId", contactId);
+
+                call.resolve(result);
             }
-
-            JSObject result = new JSObject();
-            result.put("contactId", contactId);
-
-            call.resolve(result);
+        } catch (Exception exception) {
+            rejectCall(call, exception);
         }
     }
 
     @PluginMethod
     public void deleteContact(PluginCall call) {
-        if (!isContactsPermissionGranted()) {
-            requestContactsPermission(call);
-        } else {
-            String contactId = call.getString("contactId");
+        try {
+            if (!isContactsPermissionGranted()) {
+                requestContactsPermission(call);
+            } else {
+                String contactId = call.getString("contactId");
 
-            if (contactId == null) {
-                call.reject("Parameter `contactId` not provided.");
-                return;
+                if (contactId == null) {
+                    call.reject("Parameter `contactId` not provided.");
+                    return;
+                }
+
+                if (!implementation.deleteContact(contactId)) {
+                    call.reject("Something went wrong.");
+                    return;
+                }
+
+                call.resolve();
             }
-
-            if (!implementation.deleteContact(contactId)) {
-                call.reject("Something went wrong.");
-                return;
-            }
-
-            call.resolve();
+        } catch (Exception exception) {
+            rejectCall(call, exception);
         }
     }
 
     @PluginMethod
     public void pickContact(PluginCall call) {
-        if (!isContactsPermissionGranted()) {
-            requestContactsPermission(call);
-        } else {
-            Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-            startActivityForResult(call, contactPickerIntent, "pickContactResult");
+        try {
+            if (!isContactsPermissionGranted()) {
+                requestContactsPermission(call);
+            } else {
+                Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                startActivityForResult(call, contactPickerIntent, "pickContactResult");
+            }
+        } catch (Exception exception) {
+            rejectCall(call, exception);
         }
     }
 
@@ -211,5 +241,12 @@ public class ContactsPlugin extends Plugin {
             result.put("contact", contact.getJSObject());
             call.resolve(result);
         }
+    }
+
+    private void rejectCall(PluginCall call, Exception exception) {
+        String message = exception.getMessage();
+        message = (message != null) ? message : "An error occurred.";
+        Logger.error(TAG, message, exception);
+        call.reject(message);
     }
 }
