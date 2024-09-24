@@ -28,6 +28,8 @@ import java.util.concurrent.Executors;
 )
 public class ContactsPlugin extends Plugin {
 
+    public static final String TAG = "Contacts";
+
     private Contacts implementation;
 
     @Override
