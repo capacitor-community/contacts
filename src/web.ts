@@ -4,7 +4,8 @@ import type * as Definitions from './definitions';
 
 export class ContactsWeb
   extends WebPlugin
-  implements Definitions.ContactsPlugin {
+  implements Definitions.ContactsPlugin
+{
   async checkPermissions(): Promise<Definitions.PermissionStatus> {
     throw this.unimplemented('Not implemented on web.');
   }
