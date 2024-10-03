@@ -16,7 +16,6 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
     private let implementation = Contacts()
 
     private var callingMethod: CallingMethod?
-
     private var pickContactCallbackId: String?
 
     @objc override public func checkPermissions(_ call: CAPPluginCall) {
@@ -27,8 +26,8 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             permissionState = "prompt"
         case .restricted, .denied:
             permissionState = "denied"
-        case .authorized:
-            permissionState = "granted"
+        case .authorized, .limited:
+            permissionState = "granted_limited"
         @unknown default:
             permissionState = "prompt"
         }
@@ -59,7 +58,7 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
         switch CNContactStore.authorizationStatus(for: .contacts) {
         case .notDetermined, .restricted, .denied:
             return false
-        case .authorized:
+        case .authorized, .limited:
             return true
         @unknown default:
             return false
@@ -68,7 +67,6 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
 
     private func permissionCallback(_ call: CAPPluginCall) {
         let method = self.callingMethod
-
         self.callingMethod = nil
 
         if !isContactsPermissionGranted() {
@@ -88,8 +86,6 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
         case .PickContact:
             pickContact(call)
         default:
-            // No method was being called,
-            // so nothing has to be done here.
             break
         }
     }
@@ -99,14 +95,12 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             requestContactsPermission(call, CallingMethod.GetContact)
         } else {
             let contactId = call.getString("contactId")
-
             guard let contactId = contactId else {
                 call.reject("Parameter `contactId` not provided.")
                 return
             }
 
             let projectionInput = GetContactsProjectionInput(call.getObject("projection") ?? JSObject())
-
             let contact = implementation.getContact(contactId, projectionInput)
 
             guard let contact = contact else {
@@ -127,7 +121,6 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             let projectionInput = GetContactsProjectionInput(call.getObject("projection") ?? JSObject())
 
             let contacts = implementation.getContacts(projectionInput)
-
             var contactsJSArray: JSArray = JSArray()
 
             for contact in contacts {
@@ -145,7 +138,6 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             requestContactsPermission(call, CallingMethod.CreateContact)
         } else {
             let contactInput = CreateContactInput.init(call.getObject("contact", JSObject()))
-
             let contactId = implementation.createContact(contactInput)
 
             guard let contactId = contactId else {
@@ -164,7 +156,6 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             requestContactsPermission(call, CallingMethod.DeleteContact)
         } else {
             let contactId = call.getString("contactId")
-
             guard let contactId = contactId else {
                 call.reject("Parameter `contactId` not provided.")
                 return
@@ -184,16 +175,11 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             requestContactsPermission(call, CallingMethod.PickContact)
         } else {
             DispatchQueue.main.async {
-                // Save the call and its callback id
                 self.bridge?.saveCall(call)
                 self.pickContactCallbackId = call.callbackId
 
-                // Initialize the contact picker
                 let contactPicker = CNContactPickerViewController()
-                // Mark current class as the delegate class,
-                // this will make the callback `contactPicker` actually work.
                 contactPicker.delegate = self
-                // Present (open) the native contact picker.
                 self.bridge?.viewController?.present(contactPicker, animated: true)
             }
         }
@@ -207,11 +193,31 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
         }
 
         let contact = ContactPayload(selectedContact.identifier)
-
         contact.fillData(selectedContact)
 
         call.resolve([
             "contact": contact.getJSObject()
+        ])
+
+        self.bridge?.releaseCall(call)
+    }
+
+    public func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+        let call = self.bridge?.savedCall(withID: self.pickContactCallbackId ?? "")
+
+        guard let call = call else {
+            return
+        }
+
+        var contactsArray: [JSObject] = []
+        for selectedContact in contacts {
+            let contact = ContactPayload(selectedContact.identifier)
+            contact.fillData(selectedContact)
+            contactsArray.append(contact.getJSObject())
+        }
+
+        call.resolve([
+            "contacts": contactsArray
         ])
 
         self.bridge?.releaseCall(call)
