@@ -120,6 +120,9 @@ public class Contacts: NSObject {
         if let nameSuffix = contactInput.nameSuffix {
             newContact.nameSuffix = nameSuffix
         }
+        if let nameNick = contactInput.nameNick {
+            newContact.nickname = nameNick
+        }
 
         // Organization
         if let organizationName = contactInput.organizationName {
