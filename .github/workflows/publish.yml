@@ -1,0 +1,25 @@
+name: publish
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: macos-13
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@skektec'
+      - name: Install dependencies
+        run: yarn
+      - name: Publish package
+        run: yarn publish --access restricted
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
