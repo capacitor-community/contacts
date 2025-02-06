@@ -1,6 +1,6 @@
 {
   "name": "@skektec/capacitor-contacts",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "Contacts Plugin for Capacitor, ported for Capacitor V7",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
