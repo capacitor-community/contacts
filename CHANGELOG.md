@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.8](https://github.com/Skektec/Capacitor-V7-Contacts-Port/compare/v8.0.7...v8.0.8) (2025-02-07)
+
 ### [8.0.7](https://github.com/Skektec/Capacitor-V7-Contacts-Port/compare/v8.0.6...v8.0.7) (2025-02-07)
 
 ### [8.0.6](https://github.com/Skektec/Capacitor-V7-Contacts-Port/compare/v8.0.5...v8.0.6) (2025-02-07)
