@@ -1,6 +1,6 @@
 {
   "name": "@skektec/capacitor-contacts",
-  "version": "8.0.8",
+  "version": "8.0.9",
   "description": "Contacts Plugin for Capacitor, ported for Capacitor V7",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -44,7 +44,7 @@
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "release": "standard-version && git push --follow-tags && npm publish"
+    "release": "standard-version && git push --follow-tags && npm publish --access public"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.1",
