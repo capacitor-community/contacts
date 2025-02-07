@@ -1,25 +1,67 @@
-name: publish
+name: Build and Publish
+
 on:
   release:
-    types: [published]
+    types: [created]
+
 jobs:
-  build:
+  build-and-publish:
     runs-on: macos-13
     permissions:
       contents: read
       packages: write
+
     steps:
-      - uses: actions/checkout@v4
-      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+      - uses: android-actions/setup-android@v2
+        with:
+          java-version: '17'
+          sdk-version: '33.0.0'
+          build-tools-version: '33.0.0'
+          ndk-version: '25.2.9519653'
+          components: |
+            platform-tools
+            build-tools;33.0.0
+            platforms;android-33 # Or your target platform
+            # Add other components if needed (e.g., NDK, emulators)
+
+      - name: Clean Gradle Cache
+        run: './gradlew cleanBuildCache'
+
       - uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
-          # Defaults to the user or organization that owns the workflow file
-          scope: '@skektec'
-      - name: Install dependencies
-        run: yarn
-      - name: Publish package
-        run: yarn publish --access restricted
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install Node.js Dependencies
+        run: npm ci
+
+      - name: Build Web App
+        run: npm run build
+
+      - name: Build Android App
+        run: ./gradlew assembleRelease
+
+      - name: Capacitor Sync
+        run: npx cap sync
+
+      - name: Publish to npm
+        if: github.event_name == 'release'
+        run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upload Android Artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-build-artifacts
+          path: android/app/build/outputs/apk/release

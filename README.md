@@ -16,7 +16,7 @@
   </strong>
 </p>
 
-# This fork has only been tested on V7 of capacitor.
+<h3 align="center">This fork has only been tested on V7 of capacitor.</h3>
 
 <p align="center">Capacitor Plugin for accessing Contacts.</p>
 
@@ -43,8 +43,11 @@ This plugin enables you to access the native contacts APIs of iOS and Android. I
 
 Currently there are three actively maintained versions of this plugin. The API of these versions is identical. The only difference between these versions is the supported Capacitor versions.
 
+Capacitor version 7 support was added in this fork and in our testing the only required change was the the name from `@capacitor-community/contacts` to `@skektec/capacitor-contacts.`
+
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
+| v8.x   | v7.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v6.x   | v6.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v5.x   | v5.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v4.x   | v4.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
