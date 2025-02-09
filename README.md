@@ -46,7 +46,7 @@ Currently there are three actively maintained versions of this plugin. The API o
 
 ### Capacitor V7
 
-Capacitor version 7 support was added in this fork and in our testing the only required change was the the name from `@capacitor-community/contacts` to `@skektec/capacitor-contacts.`
+Capacitor version 7 support was added in this fork and in our testing the only required change was to change the installed node module from `@capacitor-community/contacts` to `@skektec/capacitor-contacts.`
 
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
