@@ -43,6 +43,9 @@ This plugin enables you to access the native contacts APIs of iOS and Android. I
 
 Currently there are three actively maintained versions of this plugin. The API of these versions is identical. The only difference between these versions is the supported Capacitor versions.
 
+
+### Capacitor V7
+
 Capacitor version 7 support was added in this fork and in our testing the only required change was the the name from `@capacitor-community/contacts` to `@skektec/capacitor-contacts.`
 
 | Plugin | Capacitor | Status | Documentation                                           |
