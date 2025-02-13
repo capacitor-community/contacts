@@ -4,7 +4,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "inlineSources": true,
-    "lib": ["es2020", "DOM"],
+    "lib": ["ES2024", "DOM"],
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
@@ -14,7 +14,7 @@
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2020"
+    "target": "ES2024"
   },
   "files": ["src/index.ts"]
 }
