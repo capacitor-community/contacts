@@ -1,7 +1,7 @@
 {
-  "name": "@skektec/capacitor-contacts",
+  "name": "@capacitor-community/contacts",
   "version": "8.0.11",
-  "description": "Contacts Plugin for Capacitor, ported for Capacitor V7",
+  "description": "Contacts Plugin for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -11,13 +11,13 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "SkektecCapacitorContacts.podspec"
+    "CapacitorCommunityContacts.podspec"
   ],
   "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Skektec/Capacitor-V7-Contacts-Port.git"
+    "url": "git+https://github.com/capacitor-community/contacts.git"
   },
   "bugs": {
     "url": "https://github.com/capacitor-community/contacts/issues"
