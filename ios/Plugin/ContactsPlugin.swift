@@ -27,7 +27,7 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
         case .restricted, .denied:
             permissionState = "denied"
         case .authorized, .limited:
-            permissionState = "granted_limited"
+            permissionState = "limited"
         @unknown default:
             permissionState = "prompt"
         }
