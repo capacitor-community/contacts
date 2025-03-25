@@ -43,7 +43,7 @@ Currently there are three actively maintained versions of this plugin. The API o
 
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
-| v8.x   | v7.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
+| v7.x   | v7.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v6.x   | v6.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v5.x   | v5.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v4.x   | v4.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
