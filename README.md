@@ -1,16 +1,26 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" />
+  <img
+    src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png"
+    width="128"
+    height="128"
+  />
 </p>
 
-<h3 id="home" align="center">Contacts</h3>
+<h3 id="home" align="center">
+  Contacts
+</h3>
 
-<p align="center"><strong><code>@capacitor-community/contacts</code></strong></p>
+<p align="center">
+  <strong>
+    <code>@capacitor-community/contacts</code>
+  </strong>
+</p>
 
 <p align="center">Capacitor Plugin for accessing Contacts.</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3,%20v4,%20v5%20and%20v6-blue?logo=Capacitor&style=flat-square" />
-  <img src="https://img.shields.io/maintenance/yes/2024?style=flat-square" />
+  <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3,%20v4,%20v5,%20v6%20and%20v7-blue?logo=Capacitor&style=flat-square" />
+  <img src="https://img.shields.io/maintenance/yes/2025?style=flat-square" />
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts">
     <img src="https://img.shields.io/npm/l/@capacitor-community/contacts?style=flat-square" />
   </a>
@@ -33,6 +43,7 @@ Currently there are three actively maintained versions of this plugin. The API o
 
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
+| v7.x   | v7.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v6.x   | v6.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v5.x   | v5.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v4.x   | v4.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
@@ -51,7 +62,7 @@ In the past a few other versions of this plugin were released, also targeting di
 
 Admittedly, this wasn't the most consistent versioning strategy, and we'll keep it more coherent in the future.
 
-It's highly recommended to upgrade to either v3, v4, v5 or v6 if you are using an old version!
+It's highly recommended to upgrade to either v3, v4, v5, v6 or v7 if you are using an old version!
 
 <p class="hide-next-element"></p>
 

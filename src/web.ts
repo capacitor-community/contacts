@@ -2,10 +2,7 @@ import { WebPlugin } from '@capacitor/core';
 
 import type * as Definitions from './definitions';
 
-export class ContactsWeb
-  extends WebPlugin
-  implements Definitions.ContactsPlugin
-{
+export class ContactsWeb extends WebPlugin implements Definitions.ContactsPlugin {
   async checkPermissions(): Promise<Definitions.PermissionStatus> {
     throw this.unimplemented('Not implemented on web.');
   }

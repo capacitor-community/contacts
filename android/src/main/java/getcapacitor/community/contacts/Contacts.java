@@ -174,62 +174,53 @@ public class Contacts {
 
     public String createContact(CreateContactInput contactInput) {
         ArrayList<ContentProviderOperation> ops = new ArrayList<>();
-        ContentProviderOperation.Builder op = ContentProviderOperation
-            .newInsert(RawContacts.CONTENT_URI)
+        ContentProviderOperation.Builder op = ContentProviderOperation.newInsert(RawContacts.CONTENT_URI)
             .withValue(RawContacts.ACCOUNT_TYPE, null)
             .withValue(RawContacts.ACCOUNT_NAME, null);
         ops.add(op.build());
 
         // Name
-        op =
-            ContentProviderOperation
-                .newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                // Add to this key
-                .withValue(ContactsContract.Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE)
-                // Data
-                // .withValue(StructuredName.DISPLAY_NAME, name)
-                .withValue(StructuredName.GIVEN_NAME, contactInput.nameGiven)
-                .withValue(StructuredName.MIDDLE_NAME, contactInput.nameMiddle)
-                .withValue(StructuredName.FAMILY_NAME, contactInput.nameFamily)
-                .withValue(StructuredName.PREFIX, contactInput.namePrefix)
-                .withValue(StructuredName.SUFFIX, contactInput.nameSuffix);
+        op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+            // Add to this key
+            .withValue(ContactsContract.Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE)
+            // Data
+            // .withValue(StructuredName.DISPLAY_NAME, name)
+            .withValue(StructuredName.GIVEN_NAME, contactInput.nameGiven)
+            .withValue(StructuredName.MIDDLE_NAME, contactInput.nameMiddle)
+            .withValue(StructuredName.FAMILY_NAME, contactInput.nameFamily)
+            .withValue(StructuredName.PREFIX, contactInput.namePrefix)
+            .withValue(StructuredName.SUFFIX, contactInput.nameSuffix);
         ops.add(op.build());
 
         // Organization
-        op =
-            ContentProviderOperation
-                .newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                // Add to this key
-                .withValue(ContactsContract.Data.MIMETYPE, Organization.CONTENT_ITEM_TYPE)
-                // Data
-                .withValue(Organization.COMPANY, contactInput.organizationName)
-                .withValue(Organization.TITLE, contactInput.organizationJobTitle)
-                .withValue(Organization.DEPARTMENT, contactInput.organizationDepartment);
+        op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+            // Add to this key
+            .withValue(ContactsContract.Data.MIMETYPE, Organization.CONTENT_ITEM_TYPE)
+            // Data
+            .withValue(Organization.COMPANY, contactInput.organizationName)
+            .withValue(Organization.TITLE, contactInput.organizationJobTitle)
+            .withValue(Organization.DEPARTMENT, contactInput.organizationDepartment);
         ops.add(op.build());
 
         // Birthday
-        op =
-            ContentProviderOperation
-                .newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                // Add to this key
-                .withValue(ContactsContract.Data.MIMETYPE, Event.CONTENT_ITEM_TYPE)
-                // Data
-                .withValue(Event.START_DATE, contactInput.birthday)
-                .withValue(Event.TYPE, ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY);
+        op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+            // Add to this key
+            .withValue(ContactsContract.Data.MIMETYPE, Event.CONTENT_ITEM_TYPE)
+            // Data
+            .withValue(Event.START_DATE, contactInput.birthday)
+            .withValue(Event.TYPE, ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY);
         ops.add(op.build());
 
         // Note
-        op =
-            ContentProviderOperation
-                .newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                // Add to this key
-                .withValue(ContactsContract.Data.MIMETYPE, Note.CONTENT_ITEM_TYPE)
-                // Data
-                .withValue(Note.NOTE, contactInput.note);
+        op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+            // Add to this key
+            .withValue(ContactsContract.Data.MIMETYPE, Note.CONTENT_ITEM_TYPE)
+            // Data
+            .withValue(Note.NOTE, contactInput.note);
         ops.add(op.build());
 
         // @TODO not sure where to allow yields
@@ -240,16 +231,14 @@ public class Contacts {
         for (int i = 0; i < contactInput.phones.size(); i++) {
             CreateContactInput.PhoneInput phone = contactInput.phones.get(i);
 
-            op =
-                ContentProviderOperation
-                    .newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    // Add to this key
-                    .withValue(ContactsContract.Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
-                    // Data
-                    .withValue(Phone.TYPE, phone.type)
-                    .withValue(Phone.LABEL, phone.label)
-                    .withValue(Phone.NUMBER, phone.number);
+            op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                // Add to this key
+                .withValue(ContactsContract.Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
+                // Data
+                .withValue(Phone.TYPE, phone.type)
+                .withValue(Phone.LABEL, phone.label)
+                .withValue(Phone.NUMBER, phone.number);
             if (phone.isPrimary) {
                 op.withValue(Phone.IS_PRIMARY, true);
             }
@@ -260,16 +249,14 @@ public class Contacts {
         for (int i = 0; i < contactInput.emails.size(); i++) {
             CreateContactInput.EmailInput email = contactInput.emails.get(i);
 
-            op =
-                ContentProviderOperation
-                    .newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    // Add to this key
-                    .withValue(ContactsContract.Data.MIMETYPE, Email.CONTENT_ITEM_TYPE)
-                    // Data
-                    .withValue(Email.TYPE, email.type)
-                    .withValue(Email.LABEL, email.label)
-                    .withValue(Email.ADDRESS, email.address);
+            op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                // Add to this key
+                .withValue(ContactsContract.Data.MIMETYPE, Email.CONTENT_ITEM_TYPE)
+                // Data
+                .withValue(Email.TYPE, email.type)
+                .withValue(Email.LABEL, email.label)
+                .withValue(Email.ADDRESS, email.address);
             if (email.isPrimary) {
                 op.withValue(Email.IS_PRIMARY, true);
             }
@@ -278,14 +265,12 @@ public class Contacts {
 
         // URLs
         for (int i = 0; i < contactInput.urls.size(); i++) {
-            op =
-                ContentProviderOperation
-                    .newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    // Add to this key
-                    .withValue(ContactsContract.Data.MIMETYPE, Website.CONTENT_ITEM_TYPE)
-                    // Data
-                    .withValue(Website.URL, contactInput.urls.get(i));
+            op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                // Add to this key
+                .withValue(ContactsContract.Data.MIMETYPE, Website.CONTENT_ITEM_TYPE)
+                // Data
+                .withValue(Website.URL, contactInput.urls.get(i));
             ops.add(op.build());
         }
 
@@ -293,21 +278,19 @@ public class Contacts {
         for (int i = 0; i < contactInput.postalAddresses.size(); i++) {
             CreateContactInput.PostalAddressInput address = contactInput.postalAddresses.get(i);
 
-            op =
-                ContentProviderOperation
-                    .newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    // Add to this key
-                    .withValue(ContactsContract.Data.MIMETYPE, StructuredPostal.CONTENT_ITEM_TYPE)
-                    // Data
-                    .withValue(StructuredPostal.TYPE, address.type)
-                    .withValue(StructuredPostal.LABEL, address.label)
-                    .withValue(StructuredPostal.STREET, address.street)
-                    .withValue(StructuredPostal.NEIGHBORHOOD, address.neighborhood)
-                    .withValue(StructuredPostal.CITY, address.city)
-                    .withValue(StructuredPostal.REGION, address.region)
-                    .withValue(StructuredPostal.POSTCODE, address.postcode)
-                    .withValue(StructuredPostal.COUNTRY, address.country);
+            op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                // Add to this key
+                .withValue(ContactsContract.Data.MIMETYPE, StructuredPostal.CONTENT_ITEM_TYPE)
+                // Data
+                .withValue(StructuredPostal.TYPE, address.type)
+                .withValue(StructuredPostal.LABEL, address.label)
+                .withValue(StructuredPostal.STREET, address.street)
+                .withValue(StructuredPostal.NEIGHBORHOOD, address.neighborhood)
+                .withValue(StructuredPostal.CITY, address.city)
+                .withValue(StructuredPostal.REGION, address.region)
+                .withValue(StructuredPostal.POSTCODE, address.postcode)
+                .withValue(StructuredPostal.COUNTRY, address.country);
             if (address.isPrimary) {
                 op.withValue(StructuredPostal.IS_PRIMARY, true);
             }
@@ -318,14 +301,12 @@ public class Contacts {
         if (contactInput.image != null && contactInput.image.base64String != null) {
             byte[] photoData = Base64.decode(contactInput.image.base64String, Base64.DEFAULT);
 
-            op =
-                ContentProviderOperation
-                    .newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    // Add to this key
-                    .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
-                    // Data
-                    .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, photoData);
+            op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                // Add to this key
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+                // Data
+                .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, photoData);
             ops.add(op.build());
         }
 
