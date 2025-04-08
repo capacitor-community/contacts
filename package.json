@@ -41,7 +41,7 @@
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "release": "standard-version && git push --follow-tags && npm publish --access public --registry=https://registry.npmjs.org/ && npm publish --registry=https://npm.pkg.github.com/"
+    "release": "standard-version"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.1",
