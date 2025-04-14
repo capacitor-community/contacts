@@ -70,6 +70,7 @@ public class ContactPayload {
             self.name["family"] = contact.familyName
             self.name["prefix"] = contact.namePrefix
             self.name["suffix"] = contact.nameSuffix
+            self.name["nick"] = contact.nickname
         }
 
         // Organization
