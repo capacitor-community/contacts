@@ -6,7 +6,7 @@ export interface PermissionStatus {
 
 export interface ContactsPlugin {
   checkPermissions(): Promise<PermissionStatus>;
-  requestPermissions(): Promise<PermissionStatus>;
+  requestPermissions(options?: PermissionOptions): Promise<PermissionStatus>;
   getContact(options: GetContactOptions): Promise<GetContactResult>;
   getContacts(options: GetContactsOptions): Promise<GetContactsResult>;
   createContact(options: CreateContactOptions): Promise<CreateContactResult>;
@@ -108,6 +108,10 @@ export interface Projection {
    * @default false
    */
   image?: boolean;
+}
+
+export interface PermissionOptions {
+  permission: string[]
 }
 
 export interface GetContactOptions {

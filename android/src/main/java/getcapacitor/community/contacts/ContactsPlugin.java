@@ -41,6 +41,7 @@ public class ContactsPlugin extends Plugin {
     }
 
     private void requestContactsPermission(PluginCall call, String permission) {
+        call.set("requestedPermission", permission);
         requestPermissionForAlias(permission, call, "permissionCallback");
     }
 
@@ -54,6 +55,8 @@ public class ContactsPlugin extends Plugin {
 
     @PermissionCallback
     private void permissionCallback(PluginCall call, String permission) {
+        Strig permission = call.getString("requestedPermission");
+
         if (!isContactsPermissionGranted(permission)) {
             call.reject("Permission is required to " + permission + " contacts.");
             return;
