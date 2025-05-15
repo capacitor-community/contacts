@@ -34,6 +34,7 @@ public class ContactsPlugin extends Plugin {
     public static final String TAG = "Contacts";
 
     private Contacts implementation;
+    private String requestedPermission;
 
     @Override
     public void load() {
@@ -41,6 +42,7 @@ public class ContactsPlugin extends Plugin {
     }
 
     private void requestContactsPermission(PluginCall call, String permission) {
+        requestedPermission = permission;
         requestPermissionForAlias(permission, call, "permissionCallback");
     }
 
@@ -53,11 +55,10 @@ public class ContactsPlugin extends Plugin {
     }
 
     @PermissionCallback
-    private void permissionCallback(PluginCall call, Map<String, PermissionState> permissions) {
-        String permission = permissions.keySet().iterator().next(); // always only one
+    private void permissionCallback(PluginCall call) {
 
-        if (!isContactsPermissionGranted(permission)) {
-            call.reject("Permission is required to " + permission + " contacts.");
+        if (!isContactsPermissionGranted(requestedPermission)) {
+            call.reject("Permission is required to " + requestedPermission + " contacts.");
             return;
         }
 
