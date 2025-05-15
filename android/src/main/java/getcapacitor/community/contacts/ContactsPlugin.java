@@ -55,7 +55,7 @@ public class ContactsPlugin extends Plugin {
 
     @PermissionCallback
     private void permissionCallback(PluginCall call, String permission) {
-        Strig permission = call.getString("requestedPermission");
+        String permission = call.getString("requestedPermission");
 
         if (!isContactsPermissionGranted(permission)) {
             call.reject("Permission is required to " + permission + " contacts.");
