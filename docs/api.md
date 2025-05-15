@@ -14,11 +14,15 @@ checkPermissions() => Promise<PermissionStatus>
 --------------------
 
 
-### requestPermissions()
+### requestPermissions(...)
 
 ```typescript
-requestPermissions() => Promise<PermissionStatus>
+requestPermissions(options?: PermissionOptions | undefined) => Promise<PermissionStatus>
 ```
+
+| Param         | Type                                                 |
+| ------------- | ---------------------------------------------------- |
+| **`options`** | <code>[PermissionOptions](#permissionoptions)</code> |
 
 **Returns:** <code>Promise&lt;[PermissionStatus](#permissionstatus)&gt;</code>
 
@@ -106,6 +110,13 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 | Prop           | Type                                             |
 | -------------- | ------------------------------------------------ |
 | **`contacts`** | <code>[PermissionState](#permissionstate)</code> |
+
+
+#### PermissionOptions
+
+| Prop             | Type                  |
+| ---------------- | --------------------- |
+| **`permission`** | <code>string[]</code> |
 
 
 #### GetContactResult
