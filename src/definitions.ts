@@ -1,7 +1,8 @@
 import type { PermissionState } from '@capacitor/core';
 
 export interface PermissionStatus {
-  contacts: PermissionState;
+  read: PermissionState;
+  write: PermissionState;
 }
 
 export interface ContactsPlugin {
