@@ -34,7 +34,8 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
         }
 
         call.resolve([
-            "contacts": permissionState
+            "read": permissionState,
+            "write": permissionState
         ])
     }
 

@@ -1,12 +1,13 @@
 import type { PermissionState } from '@capacitor/core';
 
 export interface PermissionStatus {
-  contacts: PermissionState;
+  read: PermissionState;
+  write: PermissionState;
 }
 
 export interface ContactsPlugin {
   checkPermissions(): Promise<PermissionStatus>;
-  requestPermissions(): Promise<PermissionStatus>;
+  requestPermissions(options?: PermissionsOptions): Promise<PermissionStatus>;
   getContact(options: GetContactOptions): Promise<GetContactResult>;
   getContacts(options: GetContactsOptions): Promise<GetContactsResult>;
   createContact(options: CreateContactOptions): Promise<CreateContactResult>;
@@ -61,6 +62,8 @@ export enum PostalAddressType {
   Custom = 'custom',
 }
 
+export type PermissionType = 'read' | 'write';
+
 export interface Projection {
   /**
    * @default false
@@ -108,6 +111,10 @@ export interface Projection {
    * @default false
    */
   image?: boolean;
+}
+
+export interface PermissionsOptions {
+  permissions: PermissionType[]
 }
 
 export interface GetContactOptions {

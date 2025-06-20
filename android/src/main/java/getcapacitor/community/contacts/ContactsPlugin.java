@@ -24,35 +24,41 @@ import java.util.concurrent.Executors;
 
 @CapacitorPlugin(
     name = "Contacts",
-    permissions = { @Permission(strings = { Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS }, alias = "contacts") }
+    permissions = {
+        @Permission(strings = { Manifest.permission.READ_CONTACTS }, alias = "read"),
+        @Permission(strings = { Manifest.permission.WRITE_CONTACTS }, alias = "write")
+    }
 )
 public class ContactsPlugin extends Plugin {
 
     public static final String TAG = "Contacts";
 
     private Contacts implementation;
+    private String requestedPermission;
 
     @Override
     public void load() {
         implementation = new Contacts(getActivity());
     }
 
-    private void requestContactsPermission(PluginCall call) {
-        requestPermissionForAlias("contacts", call, "permissionCallback");
+    private void requestContactsPermission(PluginCall call, String permission) {
+        requestedPermission = permission;
+        requestPermissionForAlias(permission, call, "permissionCallback");
     }
 
     /**
      * Checks the the given permission is granted or not
      * @return Returns true if the permission is granted and false if it is denied.
      */
-    private boolean isContactsPermissionGranted() {
-        return getPermissionState("contacts") == PermissionState.GRANTED;
+    private boolean isContactsPermissionGranted(String permission) {
+        return getPermissionState(permission) == PermissionState.GRANTED;
     }
 
     @PermissionCallback
     private void permissionCallback(PluginCall call) {
-        if (!isContactsPermissionGranted()) {
-            call.reject("Permission is required to access contacts.");
+
+        if (!isContactsPermissionGranted(requestedPermission)) {
+            call.reject("Permission is required to " + requestedPermission + " contacts.");
             return;
         }
 
@@ -78,8 +84,8 @@ public class ContactsPlugin extends Plugin {
     @PluginMethod
     public void getContact(PluginCall call) {
         try {
-            if (!isContactsPermissionGranted()) {
-                requestContactsPermission(call);
+            if (!isContactsPermissionGranted("read")) {
+                requestContactsPermission(call, "read");
             } else {
                 String contactId = call.getString("contactId");
 
@@ -109,8 +115,8 @@ public class ContactsPlugin extends Plugin {
     @PluginMethod
     public void getContacts(PluginCall call) {
         try {
-            if (!isContactsPermissionGranted()) {
-                requestContactsPermission(call);
+            if (!isContactsPermissionGranted("read")) {
+                requestContactsPermission(call, "read");
             } else {
                 ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -159,8 +165,8 @@ public class ContactsPlugin extends Plugin {
     @PluginMethod
     public void createContact(PluginCall call) {
         try {
-            if (!isContactsPermissionGranted()) {
-                requestContactsPermission(call);
+            if (!isContactsPermissionGranted("write")) {
+                requestContactsPermission(call, "write");
             } else {
                 String contactId = implementation.createContact(new CreateContactInput(call.getObject("contact")));
 
@@ -182,8 +188,8 @@ public class ContactsPlugin extends Plugin {
     @PluginMethod
     public void deleteContact(PluginCall call) {
         try {
-            if (!isContactsPermissionGranted()) {
-                requestContactsPermission(call);
+            if (!isContactsPermissionGranted("write")) {
+                requestContactsPermission(call, "write");
             } else {
                 String contactId = call.getString("contactId");
 
@@ -207,8 +213,8 @@ public class ContactsPlugin extends Plugin {
     @PluginMethod
     public void pickContact(PluginCall call) {
         try {
-            if (!isContactsPermissionGranted()) {
-                requestContactsPermission(call);
+            if (!isContactsPermissionGranted("read")) {
+                requestContactsPermission(call, "read");
             } else {
                 Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                 startActivityForResult(call, contactPickerIntent, "pickContactResult");
