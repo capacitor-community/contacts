@@ -70,6 +70,7 @@ public class GetContactsProjectionInput {
             projection.append(CNContactFamilyNameKey as CNKeyDescriptor)
             projection.append(CNContactNamePrefixKey as CNKeyDescriptor)
             projection.append(CNContactNameSuffixKey as CNKeyDescriptor)
+            projection.append(CNContactNicknameKey as CNKeyDescriptor)
         }
 
         // Organization
