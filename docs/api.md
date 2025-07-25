@@ -14,11 +14,15 @@ checkPermissions() => Promise<PermissionStatus>
 --------------------
 
 
-### requestPermissions()
+### requestPermissions(...)
 
 ```typescript
-requestPermissions() => Promise<PermissionStatus>
+requestPermissions(options?: PermissionsOptions | undefined) => Promise<PermissionStatus>
 ```
+
+| Param         | Type                                                   |
+| ------------- | ------------------------------------------------------ |
+| **`options`** | <code>[PermissionsOptions](#permissionsoptions)</code> |
 
 **Returns:** <code>Promise&lt;[PermissionStatus](#permissionstatus)&gt;</code>
 
@@ -103,9 +107,17 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 
 #### PermissionStatus
 
-| Prop           | Type                                             |
-| -------------- | ------------------------------------------------ |
-| **`contacts`** | <code>[PermissionState](#permissionstate)</code> |
+| Prop        | Type                                             |
+| ----------- | ------------------------------------------------ |
+| **`read`**  | <code>[PermissionState](#permissionstate)</code> |
+| **`write`** | <code>[PermissionState](#permissionstate)</code> |
+
+
+#### PermissionsOptions
+
+| Prop              | Type                          |
+| ----------------- | ----------------------------- |
+| **`permissions`** | <code>PermissionType[]</code> |
 
 
 #### GetContactResult
@@ -367,6 +379,11 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 #### PermissionState
 
 <code>'prompt' | 'prompt-with-rationale' | 'granted' | 'denied'</code>
+
+
+#### PermissionType
+
+<code>'read' | 'write'</code>
 
 
 ### Enums
