@@ -2,6 +2,22 @@
 
 ## Install package from npm
 
+## For projects using Capacitor v7
+
+```bash
+npm install @capacitor-community/contacts@^7.0.0
+npx cap sync
+```
+
+
+## For projects using Capacitor v6
+
+```bash
+npm install @capacitor-community/contacts@^6.0.0
+npx cap sync
+```
+
+
 ## For projects using Capacitor v5
 
 ```bash
