@@ -6,6 +6,7 @@ import ContactsUI
 enum CallingMethod {
     case GetContact
     case GetContacts
+    case GetMe
     case CreateContact
     case DeleteContact
     case PickContact
@@ -81,6 +82,8 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
             getContact(call)
         case .GetContacts:
             getContacts(call)
+        case .GetMe:
+            getMe(call)
         case .CreateContact:
             createContact(call)
         case .DeleteContact:
@@ -136,6 +139,30 @@ public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
 
             call.resolve([
                 "contacts": contactsJSArray
+            ])
+        }
+    }
+
+    @objc public func getMe(_ call: CAPPluginCall) {
+        if !isContactsPermissionGranted() {
+            requestContactsPermission(call, CallingMethod.GetMe)
+        } else {
+            let email = call.getString("email")
+
+            guard let email = email else {
+                call.reject("Parameter `email` not provided.")
+                return
+            }
+
+            let contact = implementation.getMe(email)
+
+            guard let contact = contact else {
+                call.reject("Contact not found.")
+                return
+            }
+
+            call.resolve([
+                "contact": contact.getJSObject()
             ])
         }
     }

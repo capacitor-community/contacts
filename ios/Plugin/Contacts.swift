@@ -101,6 +101,27 @@ public class Contacts: NSObject {
         return contacts
     }
 
+    public func getMe(_ email: String) -> ContactPayload? {
+
+        let store = CNContactStore()
+        let keys: [CNKeyDescriptor] = [
+            CNContactIdentifierKey as CNKeyDescriptor,
+            CNContactEmailAddressesKey as CNKeyDescriptor,
+            CNContactPhoneNumbersKey as CNKeyDescriptor
+        ]
+
+        let predicate = CNContact.predicateForContacts(matchingEmailAddress: email)
+        let matches = try? store.unifiedContacts(matching: predicate, keysToFetch: keys)
+
+        if let contact = matches?.first {
+            let payload = ContactPayload(contact.identifier)
+            payload.fillData(contact)
+            return payload
+        }
+
+        return nil
+    }
+
     public func createContact(_ contactInput: CreateContactInput) -> String? {
         let newContact = CNMutableContact()
 

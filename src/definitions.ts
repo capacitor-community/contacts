@@ -7,6 +7,7 @@ export interface PermissionStatus {
 export interface ContactsPlugin {
   checkPermissions(): Promise<PermissionStatus>;
   requestPermissions(): Promise<PermissionStatus>;
+  getMe(email: string): Promise<GetMeResult>;
   getContact(options: GetContactOptions): Promise<GetContactResult>;
   getContacts(options: GetContactsOptions): Promise<GetContactsResult>;
   createContact(options: CreateContactOptions): Promise<CreateContactResult>;
@@ -117,6 +118,10 @@ export interface GetContactOptions {
 
 export interface GetContactResult {
   contact: ContactPayload;
+}
+
+export interface GetMeResult {
+  contact: ContactPayload | null;
 }
 
 export interface GetContactsOptions {

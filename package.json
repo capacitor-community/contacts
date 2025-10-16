@@ -1,5 +1,5 @@
 {
-  "name": "@capacitor-community/contacts",
+  "name": "@west-co/capacitor-contacts",
   "version": "7.0.0",
   "description": "Contacts Plugin for Capacitor",
   "main": "dist/plugin.cjs.js",
