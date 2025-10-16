@@ -132,6 +132,52 @@ public class Contacts {
         return null;
     }
 
+    public ContactPayload getMe(@NonNull String email) {
+        ContentResolver cr = this.mActivity.getContentResolver();
+
+        // Columns you want to retrieve
+        String[] projection = new String[] {
+            ContactsContract.Data.CONTACT_ID,
+            ContactsContract.Data.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Email.ADDRESS,
+            ContactsContract.CommonDataKinds.Phone.NUMBER
+        };
+
+        String selection = ContactsContract.CommonDataKinds.Email.ADDRESS + " = ?";
+        String[] selectionArgs = new String[] { email };
+
+        Cursor cursor = cr.query(
+            ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+            projection,
+            selection,
+            selectionArgs,
+            null
+        );
+
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    // Get contact ID from the result
+                    String contactId = cursor.getString(
+                        cursor.getColumnIndexOrThrow(ContactsContract.Data.CONTACT_ID)
+                    );
+
+                    ContactPayload contact = new ContactPayload(contactId);
+                    do {
+                        contact.fillDataByCursor(cursor);
+                    } while (cursor.moveToNext());
+
+                    return contact;
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+
+        return null;
+    }
+
+
     public HashMap<String, ContactPayload> getContacts(GetContactsProjectionInput projectionInput) {
         String[] projection = projectionInput.getProjection();
 

@@ -60,6 +60,9 @@ public class ContactsPlugin extends Plugin {
             case "getContact":
                 getContact(call);
                 break;
+            case "getMe":
+                getMe(call);
+                break;
             case "getContacts":
                 getContacts(call);
                 break;
@@ -150,6 +153,35 @@ public class ContactsPlugin extends Plugin {
                 );
 
                 executor.shutdown();
+            }
+        } catch (Exception exception) {
+            rejectCall(call, exception);
+        }
+    }
+
+    @PluginMethod
+    public void getMe(PluginCall call) {
+        try {
+            if (!isContactsPermissionGranted()) {
+                requestContactsPermission(call);
+            } else {
+                String email = call.getString("email");
+
+                if (email == null) {
+                    call.reject("Parameter `email` not provided.");
+                    return;
+                }
+
+                ContactPayload contact = implementation.getMe(email);
+
+                if (contact == null) {
+                    call.reject("Contact not found.");
+                    return;
+                }
+
+                JSObject result = new JSObject();
+                result.put("contact", contact.getJSObject());
+                call.resolve(result);
             }
         } catch (Exception exception) {
             rejectCall(call, exception);
