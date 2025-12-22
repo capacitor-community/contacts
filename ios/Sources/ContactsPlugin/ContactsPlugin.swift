@@ -12,7 +12,19 @@ enum CallingMethod {
 }
 
 @objc(ContactsPlugin)
-public class ContactsPlugin: CAPPlugin, CNContactPickerDelegate {
+public class ContactsPlugin: CAPPlugin, CAPBridgedPlugin, CNContactPickerDelegate {
+    public let identifier = "ContactsPlugin"
+    public let jsName = "Contacts"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "checkPermissions", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "requestPermissions", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getContact", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getContacts", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "createContact", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "deleteContact", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "pickContact", returnType: CAPPluginReturnPromise)
+    ]
+
     private let implementation = Contacts()
 
     private var callingMethod: CallingMethod?
