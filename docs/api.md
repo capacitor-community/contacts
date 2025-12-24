@@ -103,9 +103,9 @@ pickContact(options: PickContactOptions) => Promise<PickContactResult>
 
 #### PermissionStatus
 
-| Prop           | Type                                             |
-| -------------- | ------------------------------------------------ |
-| **`contacts`** | <code>[PermissionState](#permissionstate)</code> |
+| Prop           | Type                                                          |
+| -------------- | ------------------------------------------------------------- |
+| **`contacts`** | <code>[PermissionState](#permissionstate) \| 'limited'</code> |
 
 
 #### GetContactResult
