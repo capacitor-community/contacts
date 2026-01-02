@@ -20,7 +20,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3,%20v4,%20v5,%20v6%20and%20v7-blue?logo=Capacitor&style=flat-square" />
-  <img src="https://img.shields.io/maintenance/yes/2025?style=flat-square" />
+  <img src="https://img.shields.io/maintenance/yes/2026?style=flat-square" />
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts">
     <img src="https://img.shields.io/npm/l/@capacitor-community/contacts?style=flat-square" />
   </a>
