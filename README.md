@@ -19,7 +19,7 @@
 <p align="center">Capacitor Plugin for accessing Contacts.</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3,%20v4,%20v5,%20v6%20and%20v7-blue?logo=Capacitor&style=flat-square" />
+  <img src="https://img.shields.io/badge/supported%20capacitor%20versions-v3,%20v4,%20v5,%20v6,%20v7%20and%20v8-blue?logo=Capacitor&style=flat-square" />
   <img src="https://img.shields.io/maintenance/yes/2026?style=flat-square" />
   <a href="https://www.npmjs.com/package/@capacitor-community/contacts">
     <img src="https://img.shields.io/npm/l/@capacitor-community/contacts?style=flat-square" />
@@ -43,6 +43,7 @@ Currently there are three actively maintained versions of this plugin. The API o
 
 | Plugin | Capacitor | Status | Documentation                                           |
 | ------ | --------- | ------ | ------------------------------------------------------- |
+| v8.x   | v8.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v7.x   | v7.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v6.x   | v6.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
 | v5.x   | v5.x      | LTS    | [Link](https://capacitor-community.github.io/contacts/) |
@@ -62,7 +63,7 @@ In the past a few other versions of this plugin were released, also targeting di
 
 Admittedly, this wasn't the most consistent versioning strategy, and we'll keep it more coherent in the future.
 
-It's highly recommended to upgrade to either v3, v4, v5, v6 or v7 if you are using an old version!
+It's highly recommended to upgrade to either v3, v4, v5, v6, v7 or v8 if you are using an old version!
 
 <p class="hide-next-element"></p>
 
