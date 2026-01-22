@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/capacitor-community/contacts/compare/v7.1.0...v8.0.0) (2026-01-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* This plugin now only supports Capacitor 8.
+
+### Features
+
+* update to Capacitor 8
+
 ## [7.0.0](https://github.com/capacitor-community/contacts/compare/v6.1.1...v7.0.0) (2025-04-08)
 
 
