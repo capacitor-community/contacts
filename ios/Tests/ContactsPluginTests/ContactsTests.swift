@@ -1,5 +1,5 @@
 import XCTest
-@testable import Plugin
+@testable import ContactsPlugin
 
 class ContactsTests: XCTestCase {
 
