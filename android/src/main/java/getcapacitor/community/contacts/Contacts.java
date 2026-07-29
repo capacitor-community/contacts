@@ -135,16 +135,42 @@ public class Contacts {
     public HashMap<String, ContactPayload> getContacts(GetContactsProjectionInput projectionInput) {
         String[] projection = projectionInput.getProjection();
 
-        // String[] selectionArgs = projectionInput.getSelectionArgs();
+        String[] selectionArgs = projectionInput.getSelectionArgs();
 
-        // String selection = GetContactsProjectionInput.getSelection(selectionArgs);
+        String selection = GetContactsProjectionInput.getSelection(selectionArgs);
 
         HashMap<String, ContactPayload> contacts = new HashMap<>();
 
         ContentResolver cr = this.mActivity.getContentResolver();
-        // Cursor cursor = contentResolver.query(ContactsContract.Data.CONTENT_URI, projection, selectionArgs.length > 0 ? selection : null, selectionArgs.length > 0 ? selectionArgs : null, null);
-        Cursor cursor = cr.query(ContactsContract.Data.CONTENT_URI, projection, null, null, null);
 
+        if (selectionArgs.length > 0) {
+            // At least some fields (besides the contactId) are being queried.
+            // First we'll retrieve all contacts having at least one of these fields (this is called the selection).
+            // Also we only retrieve the requested fields (and the contactId field) (this is called the projection).
+            Cursor cursor = cr.query(ContactsContract.Data.CONTENT_URI, projection, selection, selectionArgs, null);
+            moveOverCursor(contacts, cursor);
+
+            // Now that we have all the contacts matching the selection and projection,
+            // we'll also want to retrieve the remaining contacts.
+            // Since there is no way really to retrieve "the remaining" contacts efficiently,
+            // we'll just retrieve them all.
+            // Also since these contacts apparently do not have any matching fields,
+            // we only need to retrieve the contactId field.
+            String[] contactIdOnlyProjection = new String[] { ContactsContract.Data._ID, ContactsContract.Data.CONTACT_ID };
+            Cursor cursorAllContacts = cr.query(ContactsContract.Data.CONTENT_URI, contactIdOnlyProjection, null, null, null);
+            moveOverCursor(contacts, cursorAllContacts);
+        } else {
+            // No specific fields are being queried.
+            // This can happen if the projection is empty.
+            // Probably the user only wants a list of all contacts and their contactId returned.
+            Cursor cursor = cr.query(ContactsContract.Data.CONTENT_URI, projection, null, null, null);
+            moveOverCursor(contacts, cursor);
+        }
+
+        return contacts;
+    }
+
+    private void moveOverCursor(HashMap<String, ContactPayload> contacts, Cursor cursor) {
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 // String _id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
@@ -168,8 +194,6 @@ public class Contacts {
         if (cursor != null) {
             cursor.close();
         }
-
-        return contacts;
     }
 
     public String createContact(CreateContactInput contactInput) {
